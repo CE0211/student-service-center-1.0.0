@@ -30,6 +30,43 @@
     showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 2200);
   }
 
+  function showCustomizationPrompt() {
+    const prompt = $("[data-custom-prompt]");
+    if (!prompt) return;
+    showCustomizationPrompt.previousFocus = document.activeElement;
+    prompt.hidden = false;
+    window.requestAnimationFrame(() => {
+      prompt.classList.add("is-open");
+      $("[data-custom-prompt-action]", prompt)?.focus({ preventScroll: true });
+    });
+  }
+
+  function closeCustomizationPrompt({ restoreFocus = true } = {}) {
+    const prompt = $("[data-custom-prompt]");
+    if (!prompt || prompt.hidden) return;
+    prompt.classList.remove("is-open");
+    window.setTimeout(() => { prompt.hidden = true; }, 220);
+    if (restoreFocus && showCustomizationPrompt.previousFocus instanceof HTMLElement) {
+      showCustomizationPrompt.previousFocus.focus({ preventScroll: true });
+    }
+  }
+
+  function bindCustomizationPrompt() {
+    const prompt = $("[data-custom-prompt]");
+    if (!prompt) return;
+    prompt.addEventListener("click", (event) => {
+      if (event.target === prompt || event.target.closest("[data-custom-prompt-close]")) {
+        closeCustomizationPrompt();
+      }
+      if (event.target.closest("[data-custom-prompt-action]")) {
+        closeCustomizationPrompt({ restoreFocus: false });
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !prompt.hidden) closeCustomizationPrompt();
+    });
+  }
+
   function applySiteSettings() {
     document.documentElement.lang = data.site.language || "zh-CN";
     document.title = data.site.title;
@@ -247,7 +284,7 @@
     });
     grid.addEventListener("click", (event) => {
       const button = event.target.closest("[data-service-demo]");
-      if (button) showToast(`${button.dataset.serviceDemo}：定制时替换为客户确认的真实入口`);
+      if (button) showCustomizationPrompt();
     });
     renderGrid(data.serviceFilters[0].id);
   }
@@ -402,21 +439,19 @@
     const mascot = $("[data-header-mascot]");
 
     if (mascot && !reduceMotion.matches) {
-      const variants = ["cat", "ghost", "tail", "duo"];
-      let currentSlot = 3;
-      let currentVariant = mascot.dataset.variant || "duo";
+      let currentSlot = 72;
       let relocating = false;
 
       const availableSlots = () => window.matchMedia("(max-width: 620px)").matches
-        ? [26, 50, 74]
-        : [18, 34, 50, 66, 82];
+        ? [28, 51, 74]
+        : [22, 38, 54, 72, 86];
 
       const pickDifferentSlot = () => {
         const slots = availableSlots();
-        const candidates = slots.map((value, index) => ({ value, index })).filter((item) => item.index !== currentSlot);
-        const selected = candidates[Math.floor(Math.random() * candidates.length)] || { value: slots[0], index: 0 };
-        currentSlot = selected.index;
-        return selected.value;
+        const candidates = slots.filter((value) => value !== currentSlot);
+        const selected = candidates[Math.floor(Math.random() * candidates.length)] || slots[0];
+        currentSlot = selected;
+        return selected;
       };
 
       const relocateMascot = () => {
@@ -426,10 +461,6 @@
         mascot.classList.add("is-hiding");
 
         window.setTimeout(() => {
-          const variantCandidates = variants.filter((variant) => variant !== currentVariant);
-          const nextVariant = variantCandidates[Math.floor(Math.random() * variantCandidates.length)] || variants[0];
-          currentVariant = nextVariant;
-          mascot.dataset.variant = nextVariant;
           mascot.style.setProperty("--mascot-x", `${pickDifferentSlot()}%`);
           mascot.classList.remove("is-hiding");
           mascot.classList.add("is-popping");
@@ -527,6 +558,7 @@
   renderProjectCases();
   renderContact();
   bindUtilities();
+  bindCustomizationPrompt();
   bindPlayfulEffects();
   observeReveals();
   restoreHashPosition();
