@@ -13,8 +13,8 @@
     <meta property="og:type" content="website" />
     <title>校园服务站定制｜网站功能展示</title>
     <link rel="icon" href="assets/creator-logo-favicon.png" type="image/png" />
-    <link rel="stylesheet" href="styles.css?v=20260719-lite" />
-    <script src="content.js?v=20260719-lite" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260719-hierarchy" />
+    <script src="content.js?v=20260719-hierarchy" defer></script>
     <script src="app.js?v=20260719-lite" defer></script>
   </head>
   <body>
@@ -29,11 +29,10 @@
         </span>
       </a>
       <nav class="desktop-nav" aria-label="主要导航">
-        <a href="#services">服务速查</a>
-        <a href="#tasks">任务</a>
-        <a href="#customize">可定制</a>
-        <a href="#examples">制作参考</a>
-        <a href="contact.html?v=20260719-copy#methods">联系</a>
+        <a href="#customize">定制功能</a>
+        <a href="#content-showcase">内容展示</a>
+        <a href="#examples">模板展示</a>
+        <a href="contact.html?v=20260719-lite#methods">联系</a>
       </nav>
       <button class="ghost-button share-button" type="button" data-share>分享</button>
       <div class="header-mascot" data-header-mascot aria-hidden="true" style="--mascot-x: 72%">
@@ -58,7 +57,7 @@
             把分散的通知、入口和经验，整理成一张可以随身打开的行动地图。
           </p>
           <div class="hero-actions">
-            <a class="primary-button" href="#tasks" data-primary-action>查看今日任务</a>
+            <a class="primary-button" href="#content-showcase" data-primary-action>查看可定制内容</a>
             <button class="text-button" type="button" data-copy-address data-copy-action>复制攻略摘要</button>
           </div>
           <div class="hero-meta" aria-label="关键信息">
@@ -90,129 +89,161 @@
         </aside>
       </section>
 
-      <section class="notice-wrap reveal" data-notice-wrap>
-        <div class="notice-icon" aria-hidden="true">!</div>
-        <div>
-          <strong data-notice-title>重要提醒</strong>
-          <p data-notice-text>缴费、宿舍和报到安排以录取通知书及学校官方渠道为准。</p>
-        </div>
-        <a href="#roadmap">查看流程</a>
-      </section>
-
-      <section class="section quick-section" aria-labelledby="quick-title">
-        <div class="section-heading reveal">
-          <p>QUICK ACCESS</p>
-          <h2 id="quick-title">常用内容，一次找到</h2>
-          <span>到校前收藏这一页，需要时直接点开。</span>
-        </div>
-        <div class="quick-grid" data-quick-links></div>
-      </section>
-
-      <section class="capability-ribbon reveal" aria-label="网站能力概览" data-highlights></section>
-
-      <section class="section roadmap-section" id="roadmap" aria-labelledby="roadmap-title">
-        <div class="section-heading light reveal">
-          <p>ARRIVAL ROADMAP</p>
-          <h2 id="roadmap-title">报到当天，一条线走完</h2>
-          <span data-roadmap-intro>现场安排可能变化，先找学院迎新点再行动。</span>
-        </div>
-        <ol class="roadmap" data-roadmap></ol>
-      </section>
-
-      <section class="section task-section" id="tasks" aria-labelledby="task-section-title">
-        <div class="section-heading reveal">
-          <p>ACTION BOARD</p>
-          <h2 id="task-section-title">按阶段查看，不被信息淹没</h2>
-          <span>每项任务都说明“做什么”和“为什么”。</span>
-        </div>
-        <div class="task-app reveal">
-          <div class="task-tabs" role="tablist" aria-label="任务阶段" data-task-tabs></div>
-          <article class="task-panel" data-task-panel aria-live="polite"></article>
-        </div>
-      </section>
-
-      <section class="section week-section" id="week" aria-labelledby="week-title">
-        <div class="section-heading reveal">
-          <p>FIRST WEEK</p>
-          <h2 id="week-title">第一周怎么过，先有一张时间表</h2>
-          <span>不用一次记住全部，到哪个阶段就看哪一张卡。</span>
-        </div>
-        <div class="week-grid" data-week-plan></div>
-      </section>
-
-      <section class="section service-directory-section" id="services" aria-labelledby="services-title">
-        <div class="section-heading service-heading reveal">
-          <p>STUDENT SERVICE DIRECTORY</p>
-          <h2 id="services-title">真正容易找不到的入口，集中放在这里</h2>
-          <span>学校地图、迎新系统、报修、资助、校医院、教务和紧急联系人，都能集中到对应使用场景。</span>
-        </div>
-        <div class="service-toolbar reveal" data-service-filters aria-label="筛选校园服务"></div>
-        <div class="service-grid" data-service-grid aria-live="polite"></div>
-        <p class="service-footnote reveal">按钮、电话、二维码、地图与办事说明集中呈现，学生不必再从群消息里反复寻找。</p>
-      </section>
-
-      <section class="section checklist-section" id="checklist" aria-labelledby="checklist-title">
-        <div class="checklist-intro reveal">
-          <p>MY CHECKLIST</p>
-          <h2 id="checklist-title">只带真正需要的</h2>
-          <span>勾选结果只保存在当前设备的浏览器里，不上传任何个人信息。</span>
-          <div class="mini-progress" aria-label="清单完成进度">
-            <i data-mini-progress></i>
+      <section class="content-chapter chapter-types" id="customize" aria-labelledby="customize-title">
+        <header class="chapter-heading reveal">
+          <span class="chapter-number">01</span>
+          <div>
+            <p>定制功能</p>
+            <h2 id="customize-title">从一次迎新，到长期校园服务，都可以单独定制</h2>
+            <span>根据面向人群、使用时间和资料规模重新规划页面，不用套固定栏目。</span>
           </div>
-          <strong data-checklist-count>0 / 0 已完成</strong>
-          <button class="reset-button" type="button" data-reset-checklist>重新整理清单</button>
-        </div>
-        <div class="checklist-card reveal" data-checklist></div>
-      </section>
-
-      <section class="section safety-section" id="safety" aria-labelledby="safety-title">
-        <div class="section-heading light reveal">
-          <p>STAY SAFE</p>
-          <h2 id="safety-title">比少带一件东西更重要的，是别踩这些坑</h2>
-          <span>遇到收费、拉群和陌生链接，先停一下，再回到官方渠道核验。</span>
-        </div>
-        <div class="safety-grid" data-safety-cards></div>
-      </section>
-
-      <section class="section faq-section" id="faq" aria-labelledby="faq-title">
-        <div class="section-heading reveal">
-          <p>COMMON QUESTIONS</p>
-          <h2 id="faq-title">新生最常问的几件事</h2>
-          <span>答案不确定时，明确引导至官方渠道。</span>
-        </div>
-        <div class="faq-list reveal" data-faq-list></div>
-      </section>
-
-      <section class="section customization-section" id="customize" aria-labelledby="customize-title">
-        <div class="section-heading customization-heading reveal">
-          <p>CUSTOM BUILD</p>
-          <h2 id="customize-title">不只是换配色，整套内容与功能都能按需求重组</h2>
-          <span>学校迎新、学院通知、社团招新、比赛专题和校园活动，都能拥有独立的内容结构、视觉风格与互动方式。</span>
-        </div>
-        <div class="customization-grid" data-customization-modules></div>
+        </header>
+        <div class="customization-grid site-type-grid" data-customization-modules></div>
         <div class="capability-boundary reveal">
           <div>
-            <span>页面支持</span>
-            <strong>主题切换、阶段任务、筛选、进度保存、清单、FAQ、分享与多端适配</strong>
+            <span>基础能力</span>
+            <strong>独立视觉、手机优先、内容整理、公开访问、二维码分享与多端适配</strong>
           </div>
           <div>
-            <span>可选增强</span>
+            <span>按需扩展</span>
             <strong>搜索、地图、表单、预约、消息提醒、数据统计与管理后台</strong>
           </div>
-          <p>需要账号登录、表单数据、支付或实时统计时，可加入相应服务、权限与安全配置。</p>
+          <p>迎新、学生会、社团和长期服务站只是常见方向，实际栏目与功能均可根据资料重新组合。</p>
         </div>
       </section>
 
-      <section class="section examples-section" id="examples" aria-labelledby="examples-title">
-        <div class="section-heading examples-heading reveal">
-          <p>BUILD REFERENCES</p>
-          <h2 id="examples-title">制作参考：从一页通知，到完整学生服务台</h2>
-          <span>三种通用方案覆盖从信息单页到综合服务台，点击卡片即可查看完整页面效果。</span>
+      <section class="content-chapter chapter-content" id="content-showcase" aria-labelledby="content-showcase-title">
+        <header class="chapter-heading reveal">
+          <span class="chapter-number">02</span>
+          <div>
+            <p>可定制内容展示</p>
+            <h2 id="content-showcase-title">一张网页里，可以放下信息、流程、工具和长期服务</h2>
+            <span>下面展示的是可拆分、删减和重新组合的页面模块，具体内容以实际项目资料为准。</span>
+          </div>
+        </header>
+
+        <section class="capability-ribbon reveal" aria-label="网站能力概览" data-highlights></section>
+
+        <div class="module-heading reveal">
+          <span>内容模块 A</span>
+          <h3>重要通知与常用入口</h3>
+          <p>把最常使用、最容易错过的信息放在前面，入口可以连接网页、地图、电话、二维码或报名表。</p>
         </div>
+        <section class="notice-wrap reveal" data-notice-wrap>
+          <div class="notice-icon" aria-hidden="true">!</div>
+          <div>
+            <strong data-notice-title>重要提醒</strong>
+            <p data-notice-text>缴费、宿舍和报到安排以录取通知书及学校官方渠道为准。</p>
+          </div>
+          <a href="#roadmap">查看流程</a>
+        </section>
+        <section class="section quick-section" aria-labelledby="quick-title">
+          <div class="section-heading reveal">
+            <p>QUICK ACCESS</p>
+            <h2 id="quick-title">常用内容，可以按使用场景集中</h2>
+            <span>入口数量、名称、顺序和跳转方式均可按需求调整。</span>
+          </div>
+          <div class="quick-grid" data-quick-links></div>
+        </section>
+
+        <div class="module-heading reveal">
+          <span>内容模块 B</span>
+          <h3>流程、阶段任务与时间表</h3>
+          <p>适合迎新报到、社团招新、活动筹备等有明确步骤和时间节点的页面。</p>
+        </div>
+        <section class="section roadmap-section" id="roadmap" aria-labelledby="roadmap-title">
+          <div class="section-heading light reveal">
+            <p>ARRIVAL ROADMAP</p>
+            <h2 id="roadmap-title">报到当天，一条线走完</h2>
+            <span data-roadmap-intro>现场安排可能变化，先找学院迎新点再行动。</span>
+          </div>
+          <ol class="roadmap" data-roadmap></ol>
+        </section>
+        <section class="section task-section" id="tasks" aria-labelledby="task-section-title">
+          <div class="section-heading reveal">
+            <p>ACTION BOARD</p>
+            <h2 id="task-section-title">按阶段查看，不被信息淹没</h2>
+            <span>每项任务都可以说明“做什么”“为什么”和“去哪里办理”。</span>
+          </div>
+          <div class="task-app reveal">
+            <div class="task-tabs" role="tablist" aria-label="任务阶段" data-task-tabs></div>
+            <article class="task-panel" data-task-panel aria-live="polite"></article>
+          </div>
+        </section>
+        <section class="section week-section" id="week" aria-labelledby="week-title">
+          <div class="section-heading reveal">
+            <p>FIRST WEEK</p>
+            <h2 id="week-title">第一周怎么过，先有一张时间表</h2>
+            <span>日期、阶段、活动安排和提醒均可替换。</span>
+          </div>
+          <div class="week-grid" data-week-plan></div>
+        </section>
+
+        <div class="module-heading reveal">
+          <span>内容模块 C</span>
+          <h3>服务入口与互动工具</h3>
+          <p>既能集中展示校园服务，也能加入筛选、清单、进度保存等真正可操作的功能。</p>
+        </div>
+        <section class="section service-directory-section" id="services" aria-labelledby="services-title">
+          <div class="section-heading service-heading reveal">
+            <p>STUDENT SERVICE DIRECTORY</p>
+            <h2 id="services-title">真正容易找不到的入口，集中放在这里</h2>
+            <span>学校地图、迎新系统、报修、资助、校医院、教务和紧急联系人，都能集中到对应使用场景。</span>
+          </div>
+          <div class="service-toolbar reveal" data-service-filters aria-label="筛选校园服务"></div>
+          <div class="service-grid" data-service-grid aria-live="polite"></div>
+          <p class="service-footnote reveal">按钮、电话、二维码、地图与办事说明均可集中呈现。</p>
+        </section>
+        <section class="section checklist-section" id="checklist" aria-labelledby="checklist-title">
+          <div class="checklist-intro reveal">
+            <p>MY CHECKLIST</p>
+            <h2 id="checklist-title">清单可以勾选，进度可以保存</h2>
+            <span>示例数据只保存在当前设备的浏览器里，不上传个人信息。</span>
+            <div class="mini-progress" aria-label="清单完成进度">
+              <i data-mini-progress></i>
+            </div>
+            <strong data-checklist-count>0 / 0 已完成</strong>
+            <button class="reset-button" type="button" data-reset-checklist>重新整理清单</button>
+          </div>
+          <div class="checklist-card reveal" data-checklist></div>
+        </section>
+
+        <div class="module-heading reveal">
+          <span>内容模块 D</span>
+          <h3>安全提醒与常见问答</h3>
+          <p>把重要边界、风险提示和高频问题提前说明，减少重复咨询。</p>
+        </div>
+        <section class="section safety-section" id="safety" aria-labelledby="safety-title">
+          <div class="section-heading light reveal">
+            <p>STAY SAFE</p>
+            <h2 id="safety-title">比少带一件东西更重要的，是别踩这些坑</h2>
+            <span>遇到收费、拉群和陌生链接，先停一下，再回到官方渠道核验。</span>
+          </div>
+          <div class="safety-grid" data-safety-cards></div>
+        </section>
+        <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+          <div class="section-heading reveal">
+            <p>COMMON QUESTIONS</p>
+            <h2 id="faq-title">常见问题，可以展开查看</h2>
+            <span>问题数量、答案内容和官方入口均可按项目资料替换。</span>
+          </div>
+          <div class="faq-list reveal" data-faq-list></div>
+        </section>
+      </section>
+
+      <section class="content-chapter chapter-templates examples-section" id="examples" aria-labelledby="examples-title">
+        <header class="chapter-heading reveal">
+          <span class="chapter-number">03</span>
+          <div>
+            <p>完整模板展示</p>
+            <h2 id="examples-title">三种制作规格，点击即可查看完整页面</h2>
+            <span>从信息单页到综合服务站，分别展示不同内容规模、互动程度与后续扩展能力。</span>
+          </div>
+        </header>
         <div class="case-grid" data-project-cases></div>
         <div class="examples-note reveal">
-          <span>如何选择</span>
-          <p>信息集中展示可选择简单版；需要筛选、日程和报名可选择标准版；需要多角色、数据与内容管理可选择进阶版。</p>
+          <span>查看说明</span>
+          <p>三个页面均为功能与视觉效果展示；正式项目会根据实际资料重新设计栏目、配色与交互方式。</p>
         </div>
       </section>
 
@@ -238,9 +269,9 @@
 
     <nav class="mobile-dock" aria-label="手机快捷导航">
       <a href="#top"><span>⌂</span>首页</a>
-      <a href="#tasks"><span>✓</span>任务</a>
-      <a href="#services"><span>◇</span>服务</a>
-      <a href="#examples"><span>▤</span>参考</a>
+      <a href="#customize"><span>◇</span>定制</a>
+      <a href="#content-showcase"><span>✓</span>内容</a>
+      <a href="#examples"><span>▤</span>模板</a>
     </nav>
 
     <div class="custom-prompt" data-custom-prompt hidden>

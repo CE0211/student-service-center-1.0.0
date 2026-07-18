@@ -41,7 +41,7 @@ window.SITE_DATA = {
     prefix: "第一次走进校园",
     title: "别慌，照着这份清单慢慢来",
     intro: "报到、入住、开课前要做的事都整理在这里。先完成最重要的，再慢慢认识新的校园和朋友。",
-    primaryAction: "从出发前开始",
+    primaryAction: "查看可定制内容",
     copyAction: "复制攻略摘要",
     copyText: "新生第一周：先核对官方通知和证件，再按学院指引报到入住；不向私人账户转账，不把证件和验证码交给陌生人。",
     arrivalDate: "手机 / 平板 / 电脑",
@@ -65,10 +65,10 @@ window.SITE_DATA = {
   ],
 
   highlights: [
-    { value: "8", label: "类校园服务" },
-    { value: "6", label: "组定制模块" },
-    { value: "3", label: "档制作参考" },
-    { value: "3", label: "端响应适配" }
+    { value: "4", label: "类定制方向" },
+    { value: "8", label: "类服务入口" },
+    { value: "4", label: "组内容模块" },
+    { value: "3", label: "档完整模板" }
   ],
 
   roadmapIntro: "现场安排可能变化，先找学院迎新点，再按本校当年流程行动。",
@@ -186,12 +186,10 @@ window.SITE_DATA = {
   ],
 
   customizationModules: [
-    { index: "01", tag: "品牌视觉", title: "先让它像你们自己的", detail: "校徽、名称、年份、主色、插画和照片都能替换，不同学院或活动也可以各有一套视觉。", examples: ["校名与届次", "Logo 与主视觉", "七套主题或指定配色"] },
-    { index: "02", tag: "内容结构", title: "资料多，也能整理得有顺序", detail: "按学生真正使用的顺序重排通知，模块可以新增、删减、合并，不必被现有页面结构限制。", examples: ["报到流程", "时间表与清单", "FAQ 与安全提醒"] },
-    { index: "03", tag: "互动工具", title: "让学生动手用，而不是只往下看", detail: "可以加入筛选、搜索、任务进度、倒计时、收藏、复制和分享，让页面变成可操作的小工具。", examples: ["分类筛选", "本地进度保存", "搜索与倒计时"] },
-    { index: "04", tag: "服务入口", title: "把常用入口放回正确位置", detail: "地图、系统、电话、二维码、群聊和公众号都能放到对应场景，减少学生反复翻群消息。", examples: ["地图与导航", "电话和二维码", "官方系统链接"] },
-    { index: "05", tag: "扩展功能", title: "需要时可以升级成服务系统", detail: "可加入表单、预约、身份登录、数据统计和管理后台，让网站从信息展示扩展为长期服务工具。", examples: ["报名与预约", "账号与权限", "数据后台"] },
-    { index: "06", tag: "适配发布", title: "学生在哪打开，都能正常使用", detail: "优先保证手机体验，同时兼容平板和电脑；可发布为网页、二维码入口或绑定独立域名。", examples: ["手机 / 平板 / 电脑", "公开页或受限访问", "独立域名与二维码"] }
+    { index: "01", tag: "迎新 / 报到", title: "迎新与新生报到网站", detail: "把录取后的通知、路线、材料、报到流程、宿舍安排和常见问题整理成一条清晰的行动路线。", examples: ["学院迎新", "新生报到", "入学指南"] },
+    { index: "02", tag: "组织 / 服务", title: "学生会与学院服务网站", detail: "集中展示部门介绍、办事入口、活动通知、值班联系和长期服务内容，减少重复转发和咨询。", examples: ["学生会主页", "学院服务", "部门导航"] },
+    { index: "03", tag: "招新 / 活动", title: "社团招新与校园活动网站", detail: "适合社团招新、校园节、比赛和专题活动，可加入分类筛选、日程、报名流程与场地说明。", examples: ["社团招新", "校园活动", "比赛专题"] },
+    { index: "04", tag: "长期运营", title: "校园长期服务站", detail: "把地图、教务、报修、资助、医疗、咨询等高频入口长期维护在一个页面，并按需要继续扩展功能。", examples: ["校园导航", "服务目录", "长期更新"] }
   ],
 
   projectCases: [
@@ -202,7 +200,7 @@ window.SITE_DATA = {
       summary: "把迎新通知整理成手机上能迅速看完的一页指南，集中呈现日期、地点、流程、材料、问答与联系入口。",
       suitable: "适合资料较少、上线时间紧的学院、班级或活动",
       features: ["关键信息", "报到流程", "材料清单", "常见问答", "一键联系"],
-      href: "showcase/basic.html?v=20260719-copy",
+      href: "showcase/basic.html?v=20260719-lite",
       tone: "basic"
     },
     {
@@ -212,7 +210,7 @@ window.SITE_DATA = {
       summary: "在完整信息展示上加入分类筛选、活动日程、场地说明、报名流程和常见问题，适合反复浏览与分享。",
       suitable: "适合社团招新、校园节、赛事和专题活动",
       features: ["分类筛选", "活动日程", "场地信息", "报名流程", "常见问答"],
-      href: "showcase/standard.html?v=20260719-copy",
+      href: "showcase/standard.html?v=20260719-lite",
       tone: "standard"
     },
     {
@@ -222,7 +220,7 @@ window.SITE_DATA = {
       summary: "根据新生、家长和志愿者身份展示不同任务，整合进度、公告、服务入口、运营数据与后台扩展说明。",
       suitable: "适合信息量大、多人群、需要长期维护的项目",
       features: ["身份视图", "任务进度", "服务目录", "运营概览", "后台扩展"],
-      href: "showcase/advanced.html?v=20260719-copy",
+      href: "showcase/advanced.html?v=20260719-lite",
       tone: "advanced"
     }
   ],
@@ -232,7 +230,7 @@ window.SITE_DATA = {
     kicker: "需要一份属于你们的服务站？",
     title: "把校园信息做成学生真正愿意使用的网站",
     label: "联系作者定制",
-    url: "contact.html?v=20260719-copy#methods"
+    url: "contact.html?v=20260719-lite#methods"
   },
 
   legal: {
