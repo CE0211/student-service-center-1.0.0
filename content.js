@@ -168,7 +168,7 @@ window.SITE_DATA = {
   officialLinks: [
     { title: "七套主题配色", note: "暖杏、珊瑚、向阳、青芽、晴空、靛蓝与柔紫", url: "#top" },
     { title: "内容模块组合", note: "流程、任务、清单、时间表、FAQ 与安全提醒", url: "#tasks" },
-    { title: "独立定制部署", note: "学校、学院、社团或活动都可拥有独立版本", url: "contact.html" }
+    { title: "独立定制部署", note: "学校、学院、社团或活动都可拥有独立版本", url: "contact.html#methods" }
   ],
 
   contact: {
@@ -176,7 +176,7 @@ window.SITE_DATA = {
     kicker: "需要一份属于你们的服务站？",
     title: "准备好学校或活动资料，就可以开始定制",
     label: "查看制作方联系方式",
-    url: "contact.html"
+    url: "contact.html#methods"
   },
 
   legal: {
