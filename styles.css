@@ -197,7 +197,7 @@ p { text-wrap: pretty; }
   box-shadow: 0 8px 18px color-mix(in srgb, var(--brand) 13%, transparent);
   transform: translateY(-1px);
 }
-.ghost-button, .text-button { cursor: pointer; border: 0; background: transparent; }
+.ghost-button { cursor: pointer; border: 0; background: transparent; }
 .ghost-button { padding: 9px 18px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 500; }
 
 .header-pendants {
@@ -418,7 +418,6 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .primary-button:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(18, 60, 58, .24); }
-.text-button { padding: 8px 0; border-bottom: 1px solid currentColor; font-weight: 500; }
 .hero-meta { margin-top: 56px; display: flex; gap: clamp(30px, 5vw, 72px); }
 .hero-meta div { display: grid; gap: 3px; }
 .hero-meta span { color: var(--muted); font-size: 12px; }
@@ -924,7 +923,6 @@ footer > p { color: var(--muted); font-size: 11px; }
   .hero-intro { margin-top: 22px; font-size: 15px; }
   .hero-actions { margin-top: 28px; gap: 18px; }
   .primary-button { min-height: 48px; padding: 0 20px; font-size: 14px; }
-  .text-button { font-size: 13px; }
   .hero-meta { margin-top: 42px; display: grid; gap: 18px; }
   .launch-card { min-height: 390px; padding: 20px; }
   .progress-orbit { width: 164px; height: 164px; margin: 36px 0 24px; }

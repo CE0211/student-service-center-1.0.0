@@ -42,8 +42,6 @@ window.SITE_DATA = {
     title: "别慌，照着这份清单慢慢来",
     intro: "报到、入住、开课前要做的事都整理在这里。先完成最重要的，再慢慢认识新的校园和朋友。",
     primaryAction: "查看可定制内容",
-    copyAction: "复制攻略摘要",
-    copyText: "新生第一周：先核对官方通知和证件，再按学院指引报到入住；不向私人账户转账，不把证件和验证码交给陌生人。",
     arrivalDate: "手机 / 平板 / 电脑",
     campusAddress: "迎新导航 / 校园生活 / 活动指南",
     statusLabel: "你的准备清单",

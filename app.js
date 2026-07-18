@@ -101,7 +101,6 @@
     setText("[data-hero-title]", data.hero.title);
     setText("[data-hero-intro]", data.hero.intro);
     setText("[data-primary-action]", data.hero.primaryAction);
-    setText("[data-copy-action]", data.hero.copyAction);
     setText("[data-arrival-date]", data.hero.arrivalDate);
     setText("[data-campus-address]", data.hero.campusAddress);
     setText("[data-status-label]", data.hero.statusLabel);
@@ -442,15 +441,6 @@
   }
 
   function bindUtilities() {
-    $("[data-copy-address]").addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(data.hero.copyText);
-        showToast("攻略摘要已复制");
-      } catch {
-        showToast(data.hero.copyText);
-      }
-    });
-
     $("[data-share]").addEventListener("click", async () => {
       if (navigator.share) {
         try {
