@@ -457,48 +457,137 @@
   }
 
   function bindPlayfulEffects() {
-    const mascot = $("[data-header-mascot]");
+    $$("[data-elastic-pendant]").forEach((pendant) => {
+      const body = $("[data-pendant-body]", pendant);
+      if (!body) return;
 
-    if (mascot && !reduceMotion.matches) {
-      let currentSlot = 72;
-      let relocating = false;
+      let x = 0;
+      let y = 0;
+      let velocityX = 0;
+      let velocityY = 0;
+      let pointerId = null;
+      let startX = 0;
+      let startY = 0;
+      let lastX = 0;
+      let lastY = 0;
+      let lastTime = 0;
+      let moved = false;
+      let springFrame = 0;
 
-      const availableSlots = () => window.matchMedia("(max-width: 620px)").matches
-        ? [28, 51, 74]
-        : [22, 38, 54, 72, 86];
-
-      const pickDifferentSlot = () => {
-        const slots = availableSlots();
-        const candidates = slots.filter((value) => value !== currentSlot);
-        const selected = candidates[Math.floor(Math.random() * candidates.length)] || slots[0];
-        currentSlot = selected;
-        return selected;
+      const stringBase = () => parseFloat(getComputedStyle(pendant).getPropertyValue("--string-base")) || 20;
+      const renderPendant = () => {
+        const lineY = Math.max(5, stringBase() + y);
+        const lineLength = Math.hypot(x, lineY);
+        const lineAngle = Math.atan2(lineY, x) * 180 / Math.PI - 90;
+        const rotation = Math.max(-16, Math.min(16, x * .12));
+        pendant.style.setProperty("--drag-x", `${x.toFixed(2)}px`);
+        pendant.style.setProperty("--drag-y", `${y.toFixed(2)}px`);
+        pendant.style.setProperty("--drag-rotate", `${rotation.toFixed(2)}deg`);
+        pendant.style.setProperty("--line-length", `${lineLength.toFixed(2)}px`);
+        pendant.style.setProperty("--line-angle", `${lineAngle.toFixed(2)}deg`);
       };
 
-      const relocateMascot = () => {
-        if (relocating || document.hidden) return;
-        relocating = true;
-        mascot.classList.remove("is-popping");
-        mascot.classList.add("is-hiding");
-
-        window.setTimeout(() => {
-          mascot.style.setProperty("--mascot-x", `${pickDifferentSlot()}%`);
-          mascot.classList.remove("is-hiding");
-          mascot.classList.add("is-popping");
-          window.setTimeout(() => {
-            mascot.classList.remove("is-popping");
-            relocating = false;
-          }, 520);
-        }, 300);
+      const stopSpring = () => {
+        if (!springFrame) return;
+        cancelAnimationFrame(springFrame);
+        springFrame = 0;
       };
 
-      mascot.addEventListener("pointerenter", relocateMascot);
-      mascot.addEventListener("pointerdown", relocateMascot);
+      const springHome = () => {
+        stopSpring();
+        if (reduceMotion.matches) {
+          x = 0;
+          y = 0;
+          velocityX = 0;
+          velocityY = 0;
+          renderPendant();
+          return;
+        }
 
-      if (window.matchMedia("(hover: none)").matches) {
-        window.setInterval(relocateMascot, 8200);
-      }
-    }
+        const tick = () => {
+          velocityX = (velocityX - x * .105) * .79;
+          velocityY = (velocityY - y * .105) * .79;
+          x += velocityX;
+          y += velocityY;
+          renderPendant();
+
+          if (Math.abs(x) < .08 && Math.abs(y) < .08 && Math.abs(velocityX) < .08 && Math.abs(velocityY) < .08) {
+            x = 0;
+            y = 0;
+            velocityX = 0;
+            velocityY = 0;
+            springFrame = 0;
+            renderPendant();
+            return;
+          }
+          springFrame = requestAnimationFrame(tick);
+        };
+        springFrame = requestAnimationFrame(tick);
+      };
+
+      const pluckPendant = () => {
+        if (reduceMotion.matches) return;
+        stopSpring();
+        y = 18;
+        velocityX = (Math.random() > .5 ? 1 : -1) * 1.4;
+        velocityY = 1.2;
+        renderPendant();
+        springHome();
+      };
+
+      body.addEventListener("pointerdown", (event) => {
+        if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
+        event.preventDefault();
+        stopSpring();
+        pointerId = event.pointerId;
+        startX = event.clientX - x;
+        startY = event.clientY - y;
+        lastX = event.clientX;
+        lastY = event.clientY;
+        lastTime = performance.now();
+        moved = false;
+        pendant.classList.add("is-dragging");
+        body.setPointerCapture(pointerId);
+      });
+
+      body.addEventListener("pointermove", (event) => {
+        if (event.pointerId !== pointerId) return;
+        event.preventDefault();
+        const now = performance.now();
+        const elapsed = Math.max(8, now - lastTime);
+        const maxX = window.matchMedia("(max-width: 620px)").matches ? 48 : 92;
+        x = Math.max(-maxX, Math.min(maxX, event.clientX - startX));
+        y = Math.max(-7, Math.min(105, event.clientY - startY));
+        velocityX = (event.clientX - lastX) / elapsed * 9;
+        velocityY = (event.clientY - lastY) / elapsed * 9;
+        moved ||= Math.hypot(event.clientX - lastX, event.clientY - lastY) > 1.5;
+        lastX = event.clientX;
+        lastY = event.clientY;
+        lastTime = now;
+        renderPendant();
+      });
+
+      const releasePendant = (event) => {
+        if (event.pointerId !== pointerId) return;
+        if (body.hasPointerCapture(pointerId)) body.releasePointerCapture(pointerId);
+        pointerId = null;
+        pendant.classList.remove("is-dragging");
+        if (!moved) {
+          pluckPendant();
+          return;
+        }
+        springHome();
+      };
+      body.addEventListener("pointerup", releasePendant);
+      body.addEventListener("pointercancel", releasePendant);
+
+      pendant.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        pluckPendant();
+      });
+      renderPendant();
+    });
 
     if (reduceMotion.matches) return;
     document.addEventListener("pointerdown", (event) => {
