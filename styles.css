@@ -1,3 +1,30 @@
+/* 阿里巴巴普惠体按官方许可仅从访客设备本地调用，不在公开仓库内分发字体文件。 */
+@font-face {
+  font-family: "Campus PuHui";
+  src:
+    local("AlibabaPuHuiTi-3-55-Regular"),
+    local("Alibaba PuHuiTi 3.0 55 Regular"),
+    local("Alibaba-PuHuiTi-R"),
+    local("Alibaba PuHuiTi R"),
+    local("阿里巴巴普惠体 R");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Campus PuHui";
+  src:
+    local("AlibabaPuHuiTi-3-65-Medium"),
+    local("Alibaba PuHuiTi 3.0 65 Medium"),
+    local("Alibaba-PuHuiTi-M"),
+    local("Alibaba PuHuiTi M"),
+    local("阿里巴巴普惠体 M");
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+}
+
 :root {
   --ink: #17201f;
   --brand: #123c3a;
@@ -11,6 +38,7 @@
   --radius-lg: 32px;
   --radius-md: 22px;
   --content: 1180px;
+  --font-sans: "Campus PuHui", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -20,16 +48,21 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  line-height: 1.65;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.72;
   max-width: 100%;
   overflow-x: clip;
   transition: color .28s ease, background-color .28s ease;
 }
-button, a { font: inherit; }
+button, input, textarea, select, a { font: inherit; }
 a { color: inherit; text-decoration: none; }
 button { color: inherit; }
 img { max-width: 100%; }
+h1, h2, h3, strong, b { font-weight: 500; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
 .skip-link { position: fixed; left: 12px; top: -60px; z-index: 100; padding: 10px 14px; background: white; }
 .skip-link:focus { top: 12px; }
 
@@ -63,7 +96,7 @@ img { max-width: 100%; }
   color: white;
   background: var(--brand);
   border-radius: 13px 13px 13px 4px;
-  font-weight: 900;
+  font-weight: 500;
   overflow: hidden;
   -webkit-user-drag: none;
   user-select: none;
@@ -77,13 +110,13 @@ img { max-width: 100%; }
   pointer-events: none;
 }
 .brand-copy { display: grid; line-height: 1.2; }
-.brand-copy strong { font-size: 15px; }
-.brand-copy small, .footer-brand small { margin-top: 4px; color: var(--muted); font: 700 10px/1 Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
-.desktop-nav { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 700; }
+.brand-copy strong { font-size: 16px; font-weight: 500; }
+.brand-copy small, .footer-brand small { margin-top: 4px; color: var(--muted); font: 500 10px/1.1 var(--font-sans); letter-spacing: .08em; text-transform: uppercase; }
+.desktop-nav { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; }
 .desktop-nav a { transition: color .2s ease; }
 .desktop-nav a:hover { color: var(--accent); }
 .ghost-button, .text-button { cursor: pointer; border: 0; background: transparent; }
-.ghost-button { padding: 9px 18px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 700; }
+.ghost-button { padding: 9px 18px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 500; }
 
 .header-mascot {
   width: 96px;
@@ -172,13 +205,13 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
 .edition, .section-heading > p, .checklist-intro > p, .official-copy > p {
   margin: 0 0 18px;
   color: var(--accent);
-  font: 800 12px/1.2 Arial, "Microsoft YaHei", sans-serif;
-  letter-spacing: .15em;
+  font: 500 12px/1.3 var(--font-sans);
+  letter-spacing: .12em;
 }
-.hero h1 { margin: 0; max-width: 760px; font-size: clamp(42px, 6.2vw, 80px); line-height: 1.08; letter-spacing: -.055em; }
+.hero h1 { margin: 0; max-width: 760px; font-size: clamp(40px, 5.6vw, 72px); font-weight: 500; line-height: 1.13; letter-spacing: -.032em; }
 .hero h1 span, .hero h1 em { display: block; }
 .hero h1 em { color: var(--brand); font-style: normal; }
-.hero-intro { max-width: 650px; margin: 28px 0 0; color: #59635f; font-size: clamp(16px, 1.7vw, 19px); }
+.hero-intro { max-width: 650px; margin: 28px 0 0; color: #59635f; font-size: clamp(16px, 1.65vw, 18px); line-height: 1.85; }
 .hero-actions { margin-top: 34px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
 .primary-button {
   min-height: 50px;
@@ -189,12 +222,12 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
   color: white;
   background: var(--brand);
   border-radius: 14px;
-  font-weight: 700;
+  font-weight: 500;
   box-shadow: 0 12px 25px rgba(18, 60, 58, .18);
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .primary-button:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(18, 60, 58, .24); }
-.text-button { padding: 8px 0; border-bottom: 1px solid currentColor; font-weight: 700; }
+.text-button { padding: 8px 0; border-bottom: 1px solid currentColor; font-weight: 500; }
 .hero-meta { margin-top: 56px; display: flex; gap: clamp(30px, 5vw, 72px); }
 .hero-meta div { display: grid; gap: 3px; }
 .hero-meta span { color: var(--muted); font-size: 12px; }
@@ -238,7 +271,7 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
 
 .section { padding: 104px 5.5%; }
 .section-heading { max-width: 650px; margin-bottom: 48px; }
-.section-heading h2, .checklist-intro h2, .official-copy h2, .contact-strip h2 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.22; letter-spacing: -.045em; }
+.section-heading h2, .checklist-intro h2, .official-copy h2, .contact-strip h2 { margin: 0; font-size: clamp(30px, 3.7vw, 46px); font-weight: 500; line-height: 1.28; letter-spacing: -.022em; }
 .section-heading > span, .checklist-intro > span, .official-copy > span { display: block; margin-top: 14px; color: var(--muted); }
 .quick-section { padding-top: 40px; }
 .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
@@ -341,7 +374,7 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
 
 .faq-list { border-top: 1px solid var(--line); }
 .faq-list details { border-bottom: 1px solid var(--line); }
-.faq-list summary { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 30px; cursor: pointer; font-size: 17px; font-weight: 700; list-style: none; }
+.faq-list summary { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 30px; cursor: pointer; font-size: 17px; font-weight: 500; list-style: none; }
 .faq-list summary::-webkit-details-marker { display: none; }
 .faq-list summary i { width: 28px; height: 28px; position: relative; flex: 0 0 auto; border: 1px solid var(--line); border-radius: 50%; }
 .faq-list summary i::before, .faq-list summary i::after { content: ""; width: 10px; height: 1px; position: absolute; left: 8px; top: 13px; background: var(--ink); transition: transform .2s ease; }
@@ -389,7 +422,7 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
 .case-meta { margin: 22px 8px 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .case-meta span { padding: 5px 9px; color: white; background: var(--case-accent); border-radius: 999px; font-size: 10px; font-weight: 900; }
 .case-meta small { color: var(--muted); font-weight: 700; }
-.case-card h3 { margin: 18px 8px 10px; font-size: 22px; line-height: 1.3; }
+.case-card h3 { margin: 18px 8px 10px; font-size: 22px; font-weight: 500; line-height: 1.4; }
 .case-card > p { margin: 0 8px; color: var(--muted); font-size: 13px; }
 .case-card > strong { margin: 18px 8px 0; color: var(--case-accent); font-size: 11px; line-height: 1.55; }
 .case-card > ul { margin: 16px 8px 0; padding: 0; display: flex; gap: 6px; flex-wrap: wrap; list-style: none; }
@@ -414,7 +447,7 @@ footer > p { color: var(--muted); font-size: 11px; }
 .back-link { padding: 8px 15px; color: var(--brand); border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 800; }
 .contact-main { width: min(calc(100% - 40px), 1080px); margin: 0 auto; }
 .contact-hero { padding: 92px 5.5% 64px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 70px; align-items: end; }
-.contact-hero h1 { margin: 0; font-size: clamp(44px, 6vw, 76px); line-height: 1.08; letter-spacing: -.06em; }
+.contact-hero h1 { margin: 0; font-size: clamp(42px, 5.5vw, 70px); font-weight: 500; line-height: 1.14; letter-spacing: -.03em; }
 .contact-hero h1 em { display: block; color: var(--brand); font-style: normal; }
 .contact-hero p { max-width: 620px; margin: 24px 0 0; color: var(--muted); font-size: 17px; }
 .contact-promise { padding: 24px; background: var(--soft); border-radius: var(--radius-md) var(--radius-md) 6px var(--radius-md); }
