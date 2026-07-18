@@ -25,6 +25,12 @@
   font-display: swap;
 }
 
+@property --progress {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 :root {
   --ink: #17201f;
   --brand: #123c3a;
@@ -261,6 +267,7 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
   width: 184px; height: 184px; margin: 42px 0 28px; padding: 8px; display: grid; place-items: center;
   border-radius: 50%; background: conic-gradient(var(--accent) var(--progress), rgba(255,255,255,.12) 0);
   transform: rotate(-90deg);
+  transition: --progress .62s cubic-bezier(.2, .82, .24, 1);
 }
 .progress-orbit > div { width: 100%; height: 100%; display: grid; place-content: center; border-radius: 50%; background: var(--brand); transform: rotate(90deg); }
 .progress-orbit strong { font: 700 44px/1 Arial, sans-serif; }
@@ -357,19 +364,60 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
 .checklist-section { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(50px, 9vw, 120px); align-items: start; }
 .checklist-intro { position: sticky; top: 115px; }
 .mini-progress { height: 7px; margin-top: 36px; background: #dedbd2; border-radius: 99px; overflow: hidden; }
-.mini-progress i { display: block; width: 0; height: 100%; background: var(--accent); border-radius: inherit; transition: width .25s ease; }
+.mini-progress i { width: 0; height: 100%; position: relative; display: block; overflow: hidden; background: var(--accent); border-radius: inherit; transition: width .58s cubic-bezier(.18, .84, .24, 1); }
+.mini-progress i::after { content: ""; width: 42%; height: 100%; position: absolute; left: 0; top: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.72), transparent); transform: translateX(-140%); }
+.mini-progress.is-advancing i::after { animation: mini-progress-shine .68s .08s ease-out both; }
 .checklist-intro > strong { display: block; margin-top: 12px; font-size: 13px; }
 .reset-button { margin-top: 16px; padding: 8px 0; cursor: pointer; color: var(--muted); background: transparent; border: 0; border-bottom: 1px solid currentColor; font-size: 12px; font-weight: 700; }
 .checklist-card { padding: 12px 30px; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow); }
 .checklist-card fieldset { margin: 0; padding: 20px 0 22px; border: 0; border-bottom: 1px solid var(--line); }
 .checklist-card fieldset:last-child { border: 0; }
 .checklist-card legend { padding: 0; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .12em; }
-.checklist-card label { min-height: 52px; display: flex; align-items: center; gap: 13px; cursor: pointer; }
+.checklist-card label { min-height: 52px; display: flex; align-items: center; gap: 13px; cursor: pointer; transform-origin: left center; }
 .checklist-card input { position: absolute; opacity: 0; pointer-events: none; }
-.check-box { width: 24px; height: 24px; display: grid; place-items: center; flex: 0 0 auto; color: transparent; border: 1.5px solid #abb2ae; border-radius: 8px; font-size: 12px; transition: all .18s ease; }
+.check-box { width: 24px; height: 24px; display: grid; place-items: center; flex: 0 0 auto; position: relative; color: transparent; border: 1.5px solid #abb2ae; border-radius: 8px; font-size: 12px; transition: color .22s ease, background-color .22s ease, border-color .22s ease, transform .22s ease; }
+.check-box::after { content: "✓"; color: white; font-size: 13px; font-weight: 700; opacity: 0; transform: scale(.15) rotate(-28deg); transition: opacity .18s ease, transform .3s cubic-bezier(.2, 1.5, .3, 1); }
 .checklist-card input:checked + .check-box { color: white; background: var(--brand); border-color: var(--brand); }
+.checklist-card input:checked + .check-box::after { opacity: 1; transform: scale(1) rotate(0); }
+.check-box.is-checking { animation: checkbox-rubber-pop .48s cubic-bezier(.18, .86, .25, 1.25); }
+.check-box.is-checking::after { animation: checkmark-pop .42s .05s cubic-bezier(.18, 1.55, .3, 1) both; }
+.checklist-card label.is-confirmed { animation: checklist-row-confirm .46s ease-out; }
 .checklist-card input:focus-visible + .check-box { outline: 3px solid rgba(242,107,79,.3); }
-.checklist-card input:checked ~ span:last-child { color: var(--muted); text-decoration: line-through; }
+.checklist-card label > span:last-child { transition: color .24s ease, opacity .24s ease; }
+.checklist-card input:checked ~ span:last-child { color: var(--muted); opacity: .76; text-decoration: line-through; text-decoration-thickness: 1px; }
+
+@keyframes checkbox-rubber-pop {
+  0% { transform: scale(1); }
+  36% { transform: scale(1.22, .82) rotate(-4deg); }
+  62% { transform: scale(.9, 1.12) rotate(2deg); }
+  82% { transform: scale(1.05, .97); }
+  100% { transform: scale(1); }
+}
+@keyframes checkmark-pop {
+  0% { opacity: 0; transform: scale(.12) rotate(-34deg); }
+  68% { opacity: 1; transform: scale(1.24) rotate(4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes checklist-row-confirm {
+  0%, 100% { transform: translateX(0); }
+  42% { transform: translateX(4px); }
+  72% { transform: translateX(-1px); }
+}
+@keyframes mini-progress-shine {
+  from { transform: translateX(-140%); }
+  to { transform: translateX(340%); }
+}
+@keyframes progress-number-bump {
+  0%, 100% { transform: translateY(0) scale(1); }
+  45% { transform: translateY(-2px) scale(1.1); }
+  72% { transform: translateY(1px) scale(.98); }
+}
+@keyframes progress-orbit-pulse {
+  0%, 100% { filter: brightness(1); }
+  46% { filter: brightness(1.12); }
+}
+.is-bumping { animation: progress-number-bump .42s cubic-bezier(.2, .82, .24, 1); }
+.progress-orbit.is-pulsing { animation: progress-orbit-pulse .54s ease-out; }
 
 .safety-section { margin: 40px 0; color: white; background: var(--brand); border-radius: 40px 40px 10px 40px; overflow: hidden; }
 .safety-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -502,6 +550,7 @@ footer > p { color: var(--muted); font-size: 11px; }
 }
 .custom-prompt.is-open { opacity: 1; }
 .custom-prompt-card {
+  --prompt-radius: 30px 30px 10px 30px;
   width: min(100%, 410px);
   min-height: 350px;
   padding: 38px 30px 30px;
@@ -512,13 +561,14 @@ footer > p { color: var(--muted); font-size: 11px; }
   color: var(--ink);
   background: var(--white);
   border: 1px solid color-mix(in srgb, var(--white) 82%, var(--ink));
-  border-radius: 30px 30px 10px 30px;
+  border-radius: var(--prompt-radius);
   box-shadow: 0 30px 90px rgba(18, 31, 30, .28);
   text-align: center;
-  transform: translateY(18px) scale(.96);
-  transition: transform .24s cubic-bezier(.2, .82, .28, 1.08);
+  opacity: 0;
+  transform: translateY(30px) scale(.22, .14) rotate(-3deg);
+  transform-origin: 50% 56%;
 }
-.custom-prompt.is-open .custom-prompt-card { transform: none; }
+.custom-prompt.is-open .custom-prompt-card { animation: custom-prompt-rubber-in .64s .08s cubic-bezier(.18, .82, .2, 1) both; }
 .custom-prompt-close {
   width: 34px;
   height: 34px;
@@ -542,9 +592,23 @@ footer > p { color: var(--muted); font-size: 11px; }
   -webkit-user-drag: none;
   user-select: none;
 }
+.custom-prompt.is-open .custom-prompt-logo { animation: custom-prompt-logo-wobble .62s .28s ease-out both; }
 .custom-prompt-card p { max-width: 340px; margin: 28px 0 0; font-size: 17px; font-weight: 500; line-height: 1.75; }
 .custom-prompt-action { width: 100%; margin-top: auto; }
 .custom-prompt-action:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 30%, transparent); outline-offset: 3px; }
+@keyframes custom-prompt-rubber-in {
+  0% { opacity: 0; transform: translateY(34px) scale(.2, .12) rotate(-3deg); border-radius: 44% 44% 14px 44%; }
+  42% { opacity: 1; transform: translateY(-5px) scale(1.08, .92) rotate(1deg); border-radius: 26px 34px 12px 32px; }
+  62% { transform: translateY(3px) scale(.96, 1.05) rotate(-.6deg); }
+  80% { transform: translateY(-1px) scale(1.025, .985) rotate(.25deg); }
+  100% { opacity: 1; transform: none; border-radius: var(--prompt-radius); }
+}
+@keyframes custom-prompt-logo-wobble {
+  0% { opacity: 0; transform: translateY(10px) scale(.72) rotate(-7deg); }
+  58% { opacity: 1; transform: translateY(-2px) scale(1.08) rotate(4deg); }
+  78% { transform: translateY(1px) scale(.97) rotate(-2deg); }
+  100% { opacity: 1; transform: none; }
+}
 .pointer-particle {
   width: var(--particle-size, 6px);
   height: var(--particle-size, 6px);
@@ -685,7 +749,7 @@ footer > p { color: var(--muted); font-size: 11px; }
   .contact-process { margin: 0 10px 60px; padding: 28px 22px; border-radius: 26px 26px 7px 26px; }
   .contact-steps { grid-template-columns: 1fr; }
   .contact-privacy { margin: -32px 10px 60px; }
-  .custom-prompt-card { min-height: 320px; padding: 32px 22px 22px; border-radius: 24px 24px 8px 24px; }
+  .custom-prompt-card { --prompt-radius: 24px 24px 8px 24px; min-height: 320px; padding: 32px 22px 22px; }
   .custom-prompt-logo { width: 100px; height: 100px; }
   .custom-prompt-card p { margin-top: 22px; font-size: 16px; }
   footer { padding: 28px 10px; display: grid; gap: 18px; }
@@ -703,4 +767,5 @@ footer > p { color: var(--muted); font-size: 11px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
   .reveal { opacity: 1; transform: none; }
+  .custom-prompt-card { opacity: 1; transform: none; }
 }

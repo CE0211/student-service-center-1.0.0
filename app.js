@@ -21,6 +21,17 @@
     }
   };
   const setText = (selector, value) => $$(selector).forEach((node) => { node.textContent = value ?? ""; });
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function replayAnimation(node, className, duration = 900) {
+    if (!node || reduceMotion.matches) return;
+    node._animationTimers ||= {};
+    window.clearTimeout(node._animationTimers[className]);
+    node.classList.remove(className);
+    void node.offsetWidth;
+    node.classList.add(className);
+    node._animationTimers[className] = window.setTimeout(() => node.classList.remove(className), duration);
+  }
 
   function showToast(message) {
     const toast = $("[data-toast]");
@@ -294,7 +305,7 @@
     try { return JSON.parse(localStorage.getItem(storageKey)) || []; } catch { return []; }
   }
 
-  function updateProgress() {
+  function updateProgress({ animate = false } = {}) {
     const inputs = $$("[data-checklist] input");
     const checked = inputs.filter((input) => input.checked).length;
     const total = inputs.length;
@@ -303,6 +314,12 @@
     setText("[data-checklist-count]", `${checked} / ${total} 已完成`);
     $("[data-progress-orbit]").style.setProperty("--progress", `${percent * 3.6}deg`);
     $("[data-mini-progress]").style.width = `${percent}%`;
+    if (animate) {
+      replayAnimation($(".mini-progress"), "is-advancing", 850);
+      replayAnimation($("[data-checklist-count]"), "is-bumping", 550);
+      replayAnimation($("[data-progress-percent]"), "is-bumping", 550);
+      replayAnimation($("[data-progress-orbit]"), "is-pulsing", 650);
+    }
     return percent;
   }
 
@@ -315,23 +332,28 @@
         ${data.checklist.filter((item) => item.group === group).map((item) => `
           <label>
             <input type="checkbox" value="${escapeHtml(item.id)}" ${completed.has(item.id) ? "checked" : ""} />
-            <span class="check-box" aria-hidden="true">✓</span>
+            <span class="check-box" aria-hidden="true"></span>
             <span>${escapeHtml(item.text)}</span>
           </label>
         `).join("")}
       </fieldset>
     `).join("");
 
-    $("[data-checklist]").addEventListener("change", () => {
+    $("[data-checklist]").addEventListener("change", (event) => {
+      const changedInput = event.target.closest('input[type="checkbox"]');
+      if (changedInput?.checked) {
+        replayAnimation(changedInput.nextElementSibling, "is-checking", 620);
+        replayAnimation(changedInput.closest("label"), "is-confirmed", 620);
+      }
       const values = $$("[data-checklist] input:checked").map((input) => input.value);
       try { localStorage.setItem(storageKey, JSON.stringify(values)); } catch { /* 隐私模式下忽略 */ }
-      const percent = updateProgress();
+      const percent = updateProgress({ animate: true });
       if (percent === 100) showToast("准备清单完成，安心出发吧");
     });
     $("[data-reset-checklist]").addEventListener("click", () => {
       $$("[data-checklist] input").forEach((input) => { input.checked = false; });
       try { localStorage.removeItem(storageKey); } catch { /* 隐私模式下忽略 */ }
-      updateProgress();
+      updateProgress({ animate: true });
       showToast("清单已重新整理");
     });
     updateProgress();
@@ -435,7 +457,6 @@
   }
 
   function bindPlayfulEffects() {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const mascot = $("[data-header-mascot]");
 
     if (mascot && !reduceMotion.matches) {
