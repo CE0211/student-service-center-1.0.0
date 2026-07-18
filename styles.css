@@ -534,6 +534,9 @@ main { width: min(calc(100% - 40px), var(--content)); margin: 0 auto; }
 .module-heading h3 { margin: 0; font-size: clamp(30px, 3.4vw, 42px); font-weight: 500; line-height: 1.28; text-wrap: balance; }
 .module-heading p { max-width: 780px; margin: 12px 0 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
 .chapter-content > .section { padding-right: 0; padding-left: 0; }
+.chapter-content > .roadmap-section,
+.chapter-content > .service-directory-section,
+.chapter-content > .safety-section { padding-right: clamp(28px, 5.5vw, 72px); padding-left: clamp(28px, 5.5vw, 72px); }
 .chapter-content .section-heading h2, .chapter-content .checklist-intro h2 { font-size: clamp(27px, 3vw, 36px); text-wrap: balance; }
 .chapter-content .section-heading > span, .chapter-content .checklist-intro > span { font-size: 15px; line-height: 1.75; }
 .chapter-content > .capability-ribbon { margin: 0 0 68px; }
