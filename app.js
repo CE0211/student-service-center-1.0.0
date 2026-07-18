@@ -40,7 +40,11 @@
       document.documentElement.style.setProperty(`--${name}`, value);
     });
 
-    setText("[data-brand-mark]", data.brand.mark);
+    const brandLogo = String(data.brand.logo || 'assets/creator-logo.png').replace(/["'()\\\r\n]/g, '');
+    $$('[data-brand-logo]').forEach((node) => {
+      node.style.setProperty('--brand-logo-image', `url("${brandLogo}")`);
+      node.addEventListener('contextmenu', (event) => event.preventDefault());
+    });
     setText("[data-brand-name]", data.brand.name);
     setText("[data-brand-subtitle]", data.brand.subtitle);
     setText("[data-footer-line]", data.brand.footerLine);
