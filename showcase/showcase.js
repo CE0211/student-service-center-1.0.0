@@ -39,7 +39,7 @@
 
   document.querySelectorAll("[data-demo-backend-action]").forEach((button) => {
     button.addEventListener("click", () => {
-      button.textContent = "演示入口 · 正式版接后台";
+      button.textContent = "后台功能可按需配置";
       window.setTimeout(() => { button.textContent = "新建公告"; }, 1800);
     });
   });

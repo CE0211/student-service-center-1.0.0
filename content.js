@@ -3,7 +3,7 @@ window.SITE_DATA = {
     id: "campus-launchpad-public-demo",
     contentVersion: "2",
     language: "zh-CN",
-    title: "校园服务站定制｜新生第一周行动地图",
+    title: "校园服务站定制｜网站功能展示",
     description: "报到流程、阶段任务、行李清单、第一周安排、常见问答与安全提醒，一页整理清楚。",
     themeColor: "#9a4e3f",
     defaultTheme: "warm",
@@ -47,7 +47,7 @@ window.SITE_DATA = {
     arrivalDate: "手机 / 平板 / 电脑",
     campusAddress: "迎新导航 / 校园生活 / 活动指南",
     statusLabel: "你的准备清单",
-    updatedAt: "展示版 2.0",
+    updatedAt: "互动示例",
     cardMessage: "勾选完成项，进度会自动保存在当前浏览器。换设备后需要重新勾选。"
   },
 
@@ -181,7 +181,7 @@ window.SITE_DATA = {
     { question: "报到日期和宿舍安排在哪里看？", answer: "优先查看录取通知书、学校迎新系统和学院官方通知。本页面负责整理行动方法，不替代学校正式安排。" },
     { question: "需要提前购买整套宿舍用品吗？", answer: "建议先确认床铺尺寸、宿舍配置和管理规定。证件、个人药品等必须品随身带，大件用品可到校观察后再决定。" },
     { question: "有人拉群、收费或推荐兼职怎么办？", answer: "先核实群主和收费主体是否为学校官方人员。任何要求向私人账户转账、索取验证码或抵押证件的情况都应立即停止。" },
-    { question: "页面信息和学校通知不一致怎么办？", answer: "无条件以学校当年正式通知为准。正式定制版本会连接客户确认的官方入口，并标记信息更新时间。" },
+    { question: "页面信息和学校通知不一致怎么办？", answer: "无条件以学校当年正式通知为准。页面可集中连接学校官方入口，并清楚标记信息更新时间。" },
     { question: "勾选的清单会上传个人信息吗？", answer: "不会。清单只保存在当前浏览器的本地存储中，换设备或清理浏览器数据后需要重新勾选。" }
   ],
 
@@ -190,7 +190,7 @@ window.SITE_DATA = {
     { index: "02", tag: "内容结构", title: "资料多，也能整理得有顺序", detail: "按学生真正使用的顺序重排通知，模块可以新增、删减、合并，不必被现有页面结构限制。", examples: ["报到流程", "时间表与清单", "FAQ 与安全提醒"] },
     { index: "03", tag: "互动工具", title: "让学生动手用，而不是只往下看", detail: "可以加入筛选、搜索、任务进度、倒计时、收藏、复制和分享，让页面变成可操作的小工具。", examples: ["分类筛选", "本地进度保存", "搜索与倒计时"] },
     { index: "04", tag: "服务入口", title: "把常用入口放回正确位置", detail: "地图、系统、电话、二维码、群聊和公众号都能放到对应场景，减少学生反复翻群消息。", examples: ["地图与导航", "电话和二维码", "官方系统链接"] },
-    { index: "05", tag: "扩展功能", title: "需要时可以升级成服务系统", detail: "表单、预约、身份登录、数据统计和管理后台可以继续开发，并根据数据安全要求选择技术方案。", examples: ["报名与预约", "账号与权限", "数据后台"] },
+    { index: "05", tag: "扩展功能", title: "需要时可以升级成服务系统", detail: "可加入表单、预约、身份登录、数据统计和管理后台，让网站从信息展示扩展为长期服务工具。", examples: ["报名与预约", "账号与权限", "数据后台"] },
     { index: "06", tag: "适配发布", title: "学生在哪打开，都能正常使用", detail: "优先保证手机体验，同时兼容平板和电脑；可发布为网页、二维码入口或绑定独立域名。", examples: ["手机 / 平板 / 电脑", "公开页或受限访问", "独立域名与二维码"] }
   ],
 
@@ -202,7 +202,7 @@ window.SITE_DATA = {
       summary: "把迎新通知整理成手机上能迅速看完的一页指南，集中呈现日期、地点、流程、材料、问答与联系入口。",
       suitable: "适合资料较少、上线时间紧的学院、班级或活动",
       features: ["关键信息", "报到流程", "材料清单", "常见问答", "一键联系"],
-      href: "showcase/basic.html",
+      href: "showcase/basic.html?v=20260719-copy",
       tone: "basic"
     },
     {
@@ -212,17 +212,17 @@ window.SITE_DATA = {
       summary: "在完整信息展示上加入分类筛选、活动日程、场地说明、报名流程和常见问题，适合反复浏览与分享。",
       suitable: "适合社团招新、校园节、赛事和专题活动",
       features: ["分类筛选", "活动日程", "场地信息", "报名流程", "常见问答"],
-      href: "showcase/standard.html",
+      href: "showcase/standard.html?v=20260719-copy",
       tone: "standard"
     },
     {
       level: "进阶",
-      type: "服务台原型",
+      type: "综合服务台",
       title: "进阶版 · 新生服务台",
       summary: "根据新生、家长和志愿者身份展示不同任务，整合进度、公告、服务入口、运营数据与后台扩展说明。",
       suitable: "适合信息量大、多人群、需要长期维护的项目",
       features: ["身份视图", "任务进度", "服务目录", "运营概览", "后台扩展"],
-      href: "showcase/advanced.html",
+      href: "showcase/advanced.html?v=20260719-copy",
       tone: "advanced"
     }
   ],
@@ -230,13 +230,13 @@ window.SITE_DATA = {
   contact: {
     enabled: true,
     kicker: "需要一份属于你们的服务站？",
-    title: "准备好学校或活动资料，就可以开始定制",
-    label: "查看制作方联系方式",
-    url: "contact.html#methods"
+    title: "把校园信息做成学生真正愿意使用的网站",
+    label: "联系作者定制",
+    url: "contact.html?v=20260719-copy#methods"
   },
 
   legal: {
-    disclaimer: "本页为网站能力演示，不对应任何真实学校；正式版本中的关键信息以客户确认的官方资料为准。",
-    footerNote: "© 2026 校园服务站定制演示 · All Rights Reserved"
+    disclaimer: "页面所示信息用于功能展示，学校项目中的关键信息以当年官方资料为准。",
+    footerNote: "© 2026 校园服务站定制 · All Rights Reserved"
   }
 };

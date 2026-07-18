@@ -3,7 +3,7 @@
 
   const data = window.SITE_DATA;
   if (!data) {
-    document.body.innerHTML = "<p style='padding:2rem'>内容配置加载失败，请检查 content.js。</p>";
+    document.body.innerHTML = "<p style='padding:2rem'>页面暂时无法加载，请稍后重试。</p>";
     return;
   }
 
@@ -280,7 +280,7 @@
           </div>
           <h3>${escapeHtml(item.title)}</h3>
           <p>${escapeHtml(item.detail)}</p>
-          <button type="button" data-service-demo="${escapeHtml(item.title)}">正式版可接真实入口 <i aria-hidden="true">↗</i></button>
+          <button type="button" data-service-demo="${escapeHtml(item.title)}">了解定制方式 <i aria-hidden="true">↗</i></button>
         </article>
       `).join("");
       $$('[data-service-filter]', toolbar).forEach((button) => {
@@ -411,7 +411,7 @@
         <p>${escapeHtml(item.summary)}</p>
         <strong>${escapeHtml(item.suitable)}</strong>
         <ul>${item.features.map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>
-        <span class="case-link">打开完整概念页面 <i aria-hidden="true">↗</i></span>
+        <span class="case-link">查看完整页面 <i aria-hidden="true">↗</i></span>
       </a>
     `).join("");
   }
