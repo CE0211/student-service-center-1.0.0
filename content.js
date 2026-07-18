@@ -1,58 +1,81 @@
 window.SITE_DATA = {
   site: {
     id: "campus-launchpad-public-demo",
-    contentVersion: "1",
+    contentVersion: "2",
     language: "zh-CN",
-    title: "校园服务站｜手机优先的学生网站定制演示",
-    description: "展示高校新生导航、阶段任务、行李清单、常见问答、官方入口等学生服务网站能力。",
-    themeColor: "#123c3a",
+    title: "校园服务站｜新生第一周行动地图",
+    description: "报到流程、阶段任务、行李清单、第一周安排、常见问答与安全提醒，一页整理清楚。",
+    themeColor: "#9a4e3f",
+    defaultTheme: "warm",
     colors: {
-      ink: "#17201f",
-      brand: "#123c3a",
-      accent: "#f26b4f",
-      paper: "#f4f0e7"
+      ink: "#302822",
+      brand: "#9a4e3f",
+      accent: "#e97755",
+      paper: "#fbf4e9",
+      white: "#fffdf8",
+      muted: "#7b6d64",
+      soft: "#f1e3d2"
     }
   },
+
+  themes: [
+    { id: "warm", label: "暖杏", colors: { ink: "#302822", brand: "#9a4e3f", accent: "#e97755", paper: "#fbf4e9", white: "#fffdf8", muted: "#7b6d64", soft: "#f1e3d2" } },
+    { id: "coral", label: "珊瑚", colors: { ink: "#352328", brand: "#a23b4a", accent: "#f06b74", paper: "#fff1f1", white: "#fffafa", muted: "#7d6469", soft: "#f6dadd" } },
+    { id: "amber", label: "向阳", colors: { ink: "#312a1c", brand: "#78571c", accent: "#e7aa2d", paper: "#fff8e7", white: "#fffdf7", muted: "#746b56", soft: "#f7e8b8" } },
+    { id: "green", label: "青芽", colors: { ink: "#1f3026", brand: "#2c6546", accent: "#67b96e", paper: "#f0f8ef", white: "#fbfffb", muted: "#64766a", soft: "#ddecdd" } },
+    { id: "blue", label: "晴空", colors: { ink: "#1d2b33", brand: "#245d7a", accent: "#4db4d7", paper: "#eff8fc", white: "#fbfeff", muted: "#607580", soft: "#d9edf5" } },
+    { id: "indigo", label: "靛蓝", colors: { ink: "#25293a", brand: "#404c8a", accent: "#778ae8", paper: "#f2f3fb", white: "#fdfdff", muted: "#6d7082", soft: "#e0e3f4" } },
+    { id: "violet", label: "柔紫", colors: { ink: "#302738", brand: "#6d4785", accent: "#b277c8", paper: "#f8f1fa", white: "#fffaff", muted: "#786a7d", soft: "#eddcf2" } }
+  ],
 
   brand: {
     mark: "启",
     name: "校园服务站",
-    subtitle: "Custom Demo",
-    footerLine: "一份母版，按需求独立定制。"
+    subtitle: "Campus Launchpad",
+    footerLine: "把复杂信息变成清晰行动。"
   },
 
   hero: {
-    edition: "高校学生服务网站 · 可定制演示",
-    prefix: "把分散的资料",
-    title: "变成学生随手能用的服务站",
-    intro: "这是一个公开功能展示页：学校、学院、年份、颜色、流程、任务、清单、链接和联系方式都可以按客户资料替换。",
-    primaryAction: "体验页面功能",
+    edition: "2026 新生第一周行动指南",
+    prefix: "第一次走进校园",
+    title: "别慌，照着这份清单慢慢来",
+    intro: "报到、入住、开课前要做的事都整理在这里。先完成最重要的，再慢慢认识新的校园和朋友。",
+    primaryAction: "从出发前开始",
+    copyAction: "复制攻略摘要",
+    copyText: "新生第一周：先核对官方通知和证件，再按学院指引报到入住；不向私人账户转账，不把证件和验证码交给陌生人。",
     arrivalDate: "手机 / 平板 / 电脑",
-    campusAddress: "新生导航、校园服务、社团招新、活动指南",
-    statusLabel: "交互功能已开启",
-    updatedAt: "展示版 1.0",
-    cardMessage: "勾选下方清单后，进度会保存在当前浏览器，不收集或上传个人信息。"
+    campusAddress: "迎新导航 / 校园生活 / 活动指南",
+    statusLabel: "你的准备清单",
+    updatedAt: "展示版 2.0",
+    cardMessage: "勾选完成项，进度会自动保存在当前浏览器。换设备后需要重新勾选。"
   },
 
   notice: {
     enabled: true,
-    title: "这是公开演示站",
-    text: "页面不对应任何真实学校；正式交付时将根据客户提供的官方资料、品牌与服务对象独立定制。"
+    title: "先认准官方通知",
+    text: "报到、缴费、宿舍与接站安排以学校当年正式通知为准；不要向私人账户转账，也不要透露短信验证码。"
   },
 
   quickLinks: [
-    { icon: "路", title: "报到流程", description: "按真实顺序整理行动路线", url: "#roadmap" },
-    { icon: "任", title: "阶段任务", description: "按时间切换不同任务", url: "#tasks" },
-    { icon: "单", title: "互动清单", description: "本地保存勾选与进度", url: "#checklist" },
-    { icon: "问", title: "常见问答", description: "集中回答高频问题", url: "#faq" }
+    { icon: "路", title: "报到路线", description: "到校当天按顺序行动", url: "#roadmap" },
+    { icon: "任", title: "阶段任务", description: "到哪个阶段看哪一组", url: "#tasks" },
+    { icon: "单", title: "行李清单", description: "勾选结果留在本机", url: "#checklist" },
+    { icon: "周", title: "第一周", description: "提前看看每日重点", url: "#week" }
   ],
 
-  roadmapIntro: "下面以高校新生报到为例；正式版可替换为活动流程、办事流程或社团招新路径。",
+  highlights: [
+    { value: "7", label: "套主题配色" },
+    { value: "4", label: "阶段任务" },
+    { value: "8", label: "项随身清单" },
+    { value: "3", label: "端响应适配" }
+  ],
+
+  roadmapIntro: "现场安排可能变化，先找学院迎新点，再按本校当年流程行动。",
   roadmap: [
-    { time: "第一步", title: "核验客户资料", detail: "确认服务对象、年份、校区、官方通知、链接与素材授权。" },
-    { time: "第二步", title: "整理行动结构", detail: "把分散信息转成流程、阶段任务、清单和常见问答。" },
-    { time: "第三步", title: "完成品牌定制", detail: "替换名称、配色、文案、入口、联系方式与视觉细节。" },
-    { time: "第四步", title: "多端检查上线", detail: "完成手机、平板、电脑测试后部署到客户自己的仓库。" }
+    { time: "到校", title: "先找到学院迎新点", detail: "核对身份、专业和班级信息，确认现场流程后再搬运行李。" },
+    { time: "随后", title: "办理报到与入住", detail: "领取材料和宿舍钥匙，记录宿管、辅导员及紧急联系电话。" },
+    { time: "当天", title: "只办必要事项", detail: "按通知处理校园卡、体检、军训物资等，推销项目先不急着买。" },
+    { time: "晚上", title: "整理第二天安排", detail: "收藏上课地点与官方入口，把宿舍和辅导员联系方式同步给家人。" }
   ],
 
   taskGroups: [
@@ -61,53 +84,60 @@ window.SITE_DATA = {
       label: "出发前",
       eyebrow: "BEFORE ARRIVAL",
       title: "先处理无法临时补办的事项",
-      intro: "任务可以按客户业务拆成不同阶段，每个阶段提供明确的行动说明。",
+      intro: "不用急着买齐所有东西，先保证身份、信息和行程不出问题。",
       items: [
         { title: "核对官方通知", detail: "确认报到日期、校区、学院、宿舍和接站安排，保存通知截图。" },
         { title: "单独收好证件", detail: "身份证、录取通知书、证件照及学校要求材料放进随身包。" },
-        { title: "规划到校路线", detail: "至少准备一套备选交通方案，并将预计到校时间告诉家人。" }
+        { title: "规划到校路线", detail: "准备一套备选交通方案，并将预计到校时间告诉家人。" }
       ],
-      tip: "正式版中的日期、收费、校区和联系方式都必须回到官方渠道核验。"
+      tip: "不确定是否必须携带的材料，先询问学校招生办或学院辅导员。"
     },
     {
       id: "arrival",
       label: "报到日",
       eyebrow: "ARRIVAL DAY",
-      title: "按学院指引行动，不跟陌生人走",
-      intro: "同一套交互可以替换成活动当天、比赛当天或社团招新当天。",
+      title: "跟着学院指引走，不跟陌生人走",
+      intro: "现场信息很多，先完成必要手续，再处理可以延后的事项。",
       items: [
         { title: "确认迎新人员身份", detail: "优先寻找学校统一标识、学院帐篷或官方志愿者。" },
         { title: "核对领取材料", detail: "当场检查校园卡、宿舍钥匙、流程单等是否齐全。" },
         { title: "拒绝非官方收费", detail: "遇到推销、兼职或代缴费，先离开现场再向学校核实。" }
       ],
-      tip: "安全提醒和免责声明会在正式交付中保留在显著位置。"
+      tip: "不要把身份证原件、手机、银行卡或验证码交给身份不明的人代办。"
     },
     {
       id: "dorm",
       label: "住宿舍",
       eyebrow: "DORM LIFE",
       title: "先保证安全和基本生活，再慢慢添置",
-      intro: "页面文字、任务数量和分类名称都可以按客户资料调整。",
+      intro: "宿舍空间有限，确认尺寸和规定前，不建议先买大件物品。",
       items: [
         { title: "检查床位与设施", detail: "记录损坏处并及时报修，确认床铺尺寸和用电规定。" },
-        { title: "保管钥匙与贵重物品", detail: "离开宿舍随手锁门，证件和电子设备不要长期放在公共区域。" },
+        { title: "保管钥匙与贵重物品", detail: "离开宿舍随手锁门，证件和电子设备不要放在公共区域。" },
         { title: "约定共同生活规则", detail: "尽早沟通作息、卫生、空调和访客等容易产生分歧的事项。" }
       ],
-      tip: "复杂内容会被压缩成适合手机阅读的短段落，而不是照搬通知全文。"
+      tip: "违规电器和大功率设备的判断标准，以宿舍管理规定为准。"
     },
     {
       id: "study",
       label: "开课前",
       eyebrow: "READY FOR CLASS",
       title: "把课表、教室和账号一次确认清楚",
-      intro: "阶段切换不需要跳转新页面，适合手机现场快速查看。",
+      intro: "第一周群消息很多，关键安排要单独收藏，不要只靠聊天记录。",
       items: [
-        { title: "登录教务系统", detail: "检查课程、上课时间、校区和教室，处理初始密码。" },
+        { title: "登录教务系统", detail: "检查课程、上课时间、校区和教室，及时修改初始密码。" },
         { title: "确认班级通知渠道", detail: "只保留经过辅导员或班助确认的正式群聊。" },
         { title: "提前走一遍路线", detail: "从宿舍到教学楼实地走一次，给早高峰预留时间。" }
       ],
-      tip: "正式版可连接学校官网、迎新网、地图、公众号文章或客户指定入口。"
+      tip: "群文件可能被多次转发，关键日期仍要回到官方通知核对。"
     }
+  ],
+
+  weekPlan: [
+    { day: "DAY 01", title: "报到与入住", detail: "完成身份核验、领钥匙、整理床位，晚上只做必要的信息归档。", tag: "先安顿" },
+    { day: "DAY 02", title: "熟悉生活半径", detail: "找到食堂、快递点、校医院、打印店和最近的便利店。", tag: "认路" },
+    { day: "DAY 03", title: "确认班级信息", detail: "核对班群、辅导员、班助、军训或入学教育安排。", tag: "核信息" },
+    { day: "BEFORE CLASS", title: "为开课做准备", detail: "登录教务系统，收藏课表，提前走一遍宿舍到教学楼的路线。", tag: "不迟到" }
   ],
 
   checklist: [
@@ -121,29 +151,36 @@ window.SITE_DATA = {
     { id: "family", group: "行程", text: "把到校时间与地址告知家人" }
   ],
 
+  safetyCards: [
+    { icon: "验", title: "缴费先验真", detail: "只使用录取通知书、学校官网或官方公众号公布的入口，不向私人账户转账。" },
+    { icon: "锁", title: "验证码不给人", detail: "密码、短信验证码、身份证照片和银行卡信息不要交给陌生人代办。" },
+    { icon: "停", title: "推销先暂停", detail: "电话卡、培训、兼职和宿舍用品不必现场决定，离开后核实清楚再购买。" }
+  ],
+
   faqs: [
-    { question: "这套页面只能用于高校迎新吗？", answer: "不是。页面结构也适合校园生活服务、社团招新、志愿活动、赛事指南和短期专题页，模块名称与内容均可替换。" },
-    { question: "手机和电脑都能正常使用吗？", answer: "可以。页面按手机优先设计，同时适配平板与电脑；交付前会检查多种常见视口和关键交互。" },
-    { question: "客户以后可以自己更新内容吗？", answer: "可以。内容集中存放在独立配置文件中，也可以购买后续更新和维护服务。" },
-    { question: "能够增加登录、缴费或报名数据库吗？", answer: "当前演示版是轻量静态网站。登录、支付、后台数据库和复杂表单属于升级项目，需要单独评估安全、合规与服务器方案。" }
+    { question: "报到日期和宿舍安排在哪里看？", answer: "优先查看录取通知书、学校迎新系统和学院官方通知。本页面负责整理行动方法，不替代学校正式安排。" },
+    { question: "需要提前购买整套宿舍用品吗？", answer: "建议先确认床铺尺寸、宿舍配置和管理规定。证件、个人药品等必须品随身带，大件用品可到校观察后再决定。" },
+    { question: "有人拉群、收费或推荐兼职怎么办？", answer: "先核实群主和收费主体是否为学校官方人员。任何要求向私人账户转账、索取验证码或抵押证件的情况都应立即停止。" },
+    { question: "页面信息和学校通知不一致怎么办？", answer: "无条件以学校当年正式通知为准。正式定制版本会连接客户确认的官方入口，并标记信息更新时间。" },
+    { question: "勾选的清单会上传个人信息吗？", answer: "不会。清单只保存在当前浏览器的本地存储中，换设备或清理浏览器数据后需要重新勾选。" }
   ],
 
   officialLinks: [
-    { title: "品牌与配色", note: "替换名称、色彩、标语与视觉风格", url: "#top" },
-    { title: "内容与模块", note: "调整流程、任务、清单、FAQ 和入口", url: "#tasks" },
-    { title: "独立部署", note: "为每位客户发布到自己的 GitHub 仓库", url: "https://github.com/CE0211" }
+    { title: "七套主题配色", note: "暖杏、珊瑚、向阳、青芽、晴空、靛蓝与柔紫", url: "#top" },
+    { title: "内容模块组合", note: "流程、任务、清单、时间表、FAQ 与安全提醒", url: "#tasks" },
+    { title: "独立定制部署", note: "学校、学院、社团或活动都可拥有独立版本", url: "contact.html" }
   ],
 
   contact: {
     enabled: true,
-    kicker: "想做一份自己的版本？",
-    title: "准备学校或活动资料，就可以开始定制",
-    label: "联系制作方",
-    url: "https://github.com/CE0211"
+    kicker: "需要一份属于你们的服务站？",
+    title: "准备好学校或活动资料，就可以开始定制",
+    label: "查看制作方联系方式",
+    url: "contact.html"
   },
 
   legal: {
-    disclaimer: "本页仅用于展示网站能力，不对应任何真实学校，也不提供真实报到或缴费服务。",
+    disclaimer: "本页为网站能力演示，不对应任何真实学校；正式版本中的关键信息以客户确认的官方资料为准。",
     footerNote: "© 2026 校园服务站定制演示 · All Rights Reserved"
   }
 };

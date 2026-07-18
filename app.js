@@ -49,6 +49,7 @@
     setText("[data-hero-title]", data.hero.title);
     setText("[data-hero-intro]", data.hero.intro);
     setText("[data-primary-action]", data.hero.primaryAction);
+    setText("[data-copy-action]", data.hero.copyAction);
     setText("[data-arrival-date]", data.hero.arrivalDate);
     setText("[data-campus-address]", data.hero.campusAddress);
     setText("[data-status-label]", data.hero.statusLabel);
@@ -62,6 +63,47 @@
     notice.hidden = !data.notice.enabled;
     setText("[data-notice-title]", data.notice.title);
     setText("[data-notice-text]", data.notice.text);
+  }
+
+  const themeStorageKey = `campus-theme:${data.site.id}`;
+  function applyTheme(themeId, announce = false) {
+    const theme = (data.themes || []).find((item) => item.id === themeId) || data.themes?.[0];
+    if (!theme) return;
+    Object.entries(theme.colors).forEach(([name, value]) => {
+      document.documentElement.style.setProperty(`--${name}`, value);
+    });
+    document.documentElement.dataset.theme = theme.id;
+    $("meta[name='theme-color']").setAttribute("content", theme.colors.brand);
+    $$('[data-theme-id]').forEach((button) => {
+      const active = button.dataset.themeId === theme.id;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    try { localStorage.setItem(themeStorageKey, theme.id); } catch { /* 隐私模式下忽略 */ }
+    if (announce) showToast(`已切换为${theme.label}主题`);
+  }
+
+  function renderThemePicker() {
+    const picker = $("[data-theme-picker]");
+    if (!picker || !data.themes?.length) return;
+    picker.innerHTML = data.themes.map((theme) => `
+      <button
+        class="theme-dot"
+        type="button"
+        data-theme-id="${escapeHtml(theme.id)}"
+        aria-label="切换为${escapeHtml(theme.label)}主题"
+        aria-pressed="false"
+        title="${escapeHtml(theme.label)}"
+        style="--dot-brand:${escapeHtml(theme.colors.brand)};--dot-accent:${escapeHtml(theme.colors.accent)}"
+      ></button>
+    `).join("");
+    picker.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-theme-id]");
+      if (button) applyTheme(button.dataset.themeId, true);
+    });
+    let savedTheme = data.site.defaultTheme;
+    try { savedTheme = localStorage.getItem(themeStorageKey) || savedTheme; } catch { /* 隐私模式下忽略 */ }
+    applyTheme(savedTheme);
   }
 
   function renderQuickLinks() {
@@ -88,6 +130,14 @@
           <p>${escapeHtml(item.detail)}</p>
         </div>
       </li>
+    `).join("");
+  }
+
+  function renderHighlights() {
+    const container = $("[data-highlights]");
+    if (!container) return;
+    container.innerHTML = data.highlights.map((item) => `
+      <div><strong>${escapeHtml(item.value)}</strong><span>${escapeHtml(item.label)}</span></div>
     `).join("");
   }
 
@@ -142,6 +192,19 @@
     renderTaskGroup(data.taskGroups[0].id);
   }
 
+  function renderWeekPlan() {
+    const container = $("[data-week-plan]");
+    if (!container) return;
+    container.innerHTML = data.weekPlan.map((item, index) => `
+      <article class="week-card reveal">
+        <div class="week-card-top"><span>${escapeHtml(item.day)}</span><b>${String(index + 1).padStart(2, "0")}</b></div>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.detail)}</p>
+        <small>${escapeHtml(item.tag)}</small>
+      </article>
+    `).join("");
+  }
+
   const storageKey = `campus-guide:${data.site.id}:${data.site.contentVersion}:checklist`;
   function loadChecks() {
     try { return JSON.parse(localStorage.getItem(storageKey)) || []; } catch { return []; }
@@ -156,6 +219,7 @@
     setText("[data-checklist-count]", `${checked} / ${total} 已完成`);
     $("[data-progress-orbit]").style.setProperty("--progress", `${percent * 3.6}deg`);
     $("[data-mini-progress]").style.width = `${percent}%`;
+    return percent;
   }
 
   function renderChecklist() {
@@ -177,9 +241,28 @@
     $("[data-checklist]").addEventListener("change", () => {
       const values = $$("[data-checklist] input:checked").map((input) => input.value);
       try { localStorage.setItem(storageKey, JSON.stringify(values)); } catch { /* 隐私模式下忽略 */ }
+      const percent = updateProgress();
+      if (percent === 100) showToast("准备清单完成，安心出发吧");
+    });
+    $("[data-reset-checklist]").addEventListener("click", () => {
+      $$("[data-checklist] input").forEach((input) => { input.checked = false; });
+      try { localStorage.removeItem(storageKey); } catch { /* 隐私模式下忽略 */ }
       updateProgress();
+      showToast("清单已重新整理");
     });
     updateProgress();
+  }
+
+  function renderSafetyCards() {
+    const container = $("[data-safety-cards]");
+    if (!container) return;
+    container.innerHTML = data.safetyCards.map((item) => `
+      <article class="safety-card reveal">
+        <span>${escapeHtml(item.icon)}</span>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.detail)}</p>
+      </article>
+    `).join("");
   }
 
   function renderFaqs() {
@@ -217,10 +300,10 @@
   function bindUtilities() {
     $("[data-copy-address]").addEventListener("click", async () => {
       try {
-        await navigator.clipboard.writeText(data.hero.campusAddress);
-        showToast("功能说明已复制");
+        await navigator.clipboard.writeText(data.hero.copyText);
+        showToast("攻略摘要已复制");
       } catch {
-        showToast(data.hero.campusAddress);
+        showToast(data.hero.copyText);
       }
     });
 
@@ -259,10 +342,14 @@
   }
 
   applySiteSettings();
+  renderThemePicker();
   renderQuickLinks();
+  renderHighlights();
   renderRoadmap();
   renderTasks();
+  renderWeekPlan();
   renderChecklist();
+  renderSafetyCards();
   renderFaqs();
   renderOfficialLinks();
   bindUtilities();

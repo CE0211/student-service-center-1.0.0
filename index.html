@@ -6,8 +6,11 @@
     <meta name="theme-color" content="#123c3a" />
     <meta
       name="description"
-      content="面向高校新生的手机端校园服务导航，集中整理报到流程、待办事项、常用入口与安全提醒。"
+      content="一站式校园新生行动指南：报到流程、阶段任务、行李清单、第一周安排、常见问答与安全提醒。"
     />
+    <meta property="og:title" content="校园服务站｜新生第一周行动地图" />
+    <meta property="og:description" content="把报到、入住和开课前要做的事，一次整理清楚。" />
+    <meta property="og:type" content="website" />
     <title>校园服务站｜网站定制演示</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
@@ -30,12 +33,17 @@
         <a href="#tasks">任务</a>
         <a href="#checklist">清单</a>
         <a href="#faq">问答</a>
+        <a href="contact.html">联系</a>
       </nav>
       <button class="ghost-button share-button" type="button" data-share>分享</button>
     </header>
 
     <main id="main">
       <section class="hero" id="top">
+        <div class="theme-picker reveal" aria-label="切换网站主题色">
+          <span>换个心情</span>
+          <div data-theme-picker></div>
+        </div>
         <div class="hero-copy reveal">
           <p class="edition" data-edition>高校学生服务网站 · 可定制演示</p>
           <h1>
@@ -47,15 +55,15 @@
           </p>
           <div class="hero-actions">
             <a class="primary-button" href="#tasks" data-primary-action>查看今日任务</a>
-            <button class="text-button" type="button" data-copy-address>复制功能说明</button>
+            <button class="text-button" type="button" data-copy-address data-copy-action>复制攻略摘要</button>
           </div>
           <div class="hero-meta" aria-label="关键信息">
             <div>
-              <span>交付形式</span>
+              <span>适配渠道</span>
               <strong data-arrival-date>以通知书为准</strong>
             </div>
             <div>
-              <span>适配范围</span>
+              <span>使用场景</span>
               <strong data-campus-address>新生导航、校园服务、社团招新、活动指南</strong>
             </div>
           </div>
@@ -84,17 +92,19 @@
           <strong data-notice-title>重要提醒</strong>
           <p data-notice-text>缴费、宿舍和报到安排以录取通知书及学校官方渠道为准。</p>
         </div>
-        <a href="#official">核对入口</a>
+        <a href="#roadmap">查看流程</a>
       </section>
 
       <section class="section quick-section" aria-labelledby="quick-title">
         <div class="section-heading reveal">
           <p>QUICK ACCESS</p>
-          <h2 id="quick-title">高频入口，不用到处找</h2>
-          <span>把客户最常被问到的链接放在这里。</span>
+          <h2 id="quick-title">常用内容，一次找到</h2>
+          <span>到校前收藏这一页，需要时直接点开。</span>
         </div>
         <div class="quick-grid" data-quick-links></div>
       </section>
+
+      <section class="capability-ribbon reveal" aria-label="网站能力概览" data-highlights></section>
 
       <section class="section roadmap-section" id="roadmap" aria-labelledby="roadmap-title">
         <div class="section-heading light reveal">
@@ -117,6 +127,15 @@
         </div>
       </section>
 
+      <section class="section week-section" id="week" aria-labelledby="week-title">
+        <div class="section-heading reveal">
+          <p>FIRST WEEK</p>
+          <h2 id="week-title">第一周怎么过，先有一张时间表</h2>
+          <span>不用一次记住全部，到哪个阶段就看哪一张卡。</span>
+        </div>
+        <div class="week-grid" data-week-plan></div>
+      </section>
+
       <section class="section checklist-section" id="checklist" aria-labelledby="checklist-title">
         <div class="checklist-intro reveal">
           <p>MY CHECKLIST</p>
@@ -126,8 +145,18 @@
             <i data-mini-progress></i>
           </div>
           <strong data-checklist-count>0 / 0 已完成</strong>
+          <button class="reset-button" type="button" data-reset-checklist>重新整理清单</button>
         </div>
         <div class="checklist-card reveal" data-checklist></div>
+      </section>
+
+      <section class="section safety-section" id="safety" aria-labelledby="safety-title">
+        <div class="section-heading light reveal">
+          <p>STAY SAFE</p>
+          <h2 id="safety-title">比少带一件东西更重要的，是别踩这些坑</h2>
+          <span>遇到收费、拉群和陌生链接，先停一下，再回到官方渠道核验。</span>
+        </div>
+        <div class="safety-grid" data-safety-cards></div>
       </section>
 
       <section class="section faq-section" id="faq" aria-labelledby="faq-title">
@@ -148,7 +177,7 @@
         <div class="official-links reveal" data-official-links></div>
       </section>
 
-      <section class="contact-strip reveal" data-contact-wrap>
+      <section class="contact-strip reveal" id="contact" data-contact-wrap>
         <div>
           <span data-contact-kicker>还没找到答案？</span>
           <h2 data-contact-title>联系新生服务志愿者</h2>
@@ -172,7 +201,7 @@
       <a href="#top"><span>⌂</span>首页</a>
       <a href="#tasks"><span>✓</span>任务</a>
       <a href="#checklist"><span>▤</span>清单</a>
-      <a href="#official"><span>↗</span>官方</a>
+      <a href="contact.html"><span>◎</span>联系</a>
     </nav>
 
     <div class="toast" role="status" aria-live="polite" data-toast></div>
