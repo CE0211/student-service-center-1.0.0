@@ -3,7 +3,7 @@ window.SITE_DATA = {
     id: "campus-launchpad-public-demo",
     contentVersion: "2",
     language: "zh-CN",
-    title: "校园服务站｜新生第一周行动地图",
+    title: "校园服务站定制｜新生第一周行动地图",
     description: "报到流程、阶段任务、行李清单、第一周安排、常见问答与安全提醒，一页整理清楚。",
     themeColor: "#9a4e3f",
     defaultTheme: "warm",
@@ -31,7 +31,7 @@ window.SITE_DATA = {
   brand: {
     mark: "启",
     logo: "assets/creator-logo.png",
-    name: "校园服务站",
+    name: "校园服务站定制",
     subtitle: "Campus Launchpad",
     footerLine: "把复杂信息变成清晰行动。"
   },
