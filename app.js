@@ -117,6 +117,19 @@
     setText("[data-notice-text]", data.notice.text);
   }
 
+  function assignRandomWatermarks() {
+    const watermarkLogos = [
+      "assets/creator-logo-hd.webp",
+      "assets/pendant-wine.webp",
+      "assets/pendant-yarn.webp",
+      "assets/pendant-stretch.webp"
+    ];
+    $$(".hero, .week-card, .content-chapter, .contact-strip").forEach((node) => {
+      const logo = watermarkLogos[Math.floor(Math.random() * watermarkLogos.length)];
+      node.style.setProperty("--watermark-logo", `url("${logo}")`);
+    });
+  }
+
   const themeStorageKey = `campus-theme:${data.site.id}`;
   function applyTheme(themeId, announce = false) {
     const theme = (data.themes || []).find((item) => item.id === themeId) || data.themes?.[0];
@@ -466,20 +479,28 @@
       let velocityX = 0;
       let velocityY = 0;
       let pointerId = null;
-      let startX = 0;
-      let startY = 0;
+      let homeLeft = 0;
+      let homeTop = 0;
+      let bodyWidth = 0;
+      let bodyHeight = 0;
+      let grabOffsetX = 0;
+      let grabOffsetY = 0;
       let lastX = 0;
       let lastY = 0;
       let lastTime = 0;
+      let dragStartX = 0;
+      let dragStartY = 0;
       let moved = false;
+      let dragging = false;
       let springFrame = 0;
 
       const stringBase = () => parseFloat(getComputedStyle(pendant).getPropertyValue("--string-base")) || 20;
+      const stringOverlap = () => parseFloat(getComputedStyle(pendant).getPropertyValue("--string-overlap")) || 8;
       const renderPendant = () => {
-        const lineY = Math.max(5, stringBase() + y);
+        const lineY = Math.max(5, stringBase() + y + stringOverlap());
         const lineLength = Math.hypot(x, lineY);
         const lineAngle = Math.atan2(lineY, x) * 180 / Math.PI - 90;
-        const rotation = Math.max(-16, Math.min(16, x * .12));
+        const rotation = Math.max(-24, Math.min(24, x * .025 + velocityX * 1.15));
         pendant.style.setProperty("--drag-x", `${x.toFixed(2)}px`);
         pendant.style.setProperty("--drag-y", `${y.toFixed(2)}px`);
         pendant.style.setProperty("--drag-rotate", `${rotation.toFixed(2)}deg`);
@@ -504,14 +525,21 @@
           return;
         }
 
+        if (Math.abs(velocityX) < 2 && Math.hypot(x, y) > 12) {
+          velocityX += (Math.random() > .5 ? 1 : -1) * 2.8;
+        }
+
         const tick = () => {
-          velocityX = (velocityX - x * .105) * .79;
-          velocityY = (velocityY - y * .105) * .79;
+          const distance = Math.hypot(x, y);
+          const stiffness = .028 + Math.min(distance / 1000, .035);
+          const damping = distance > 34 ? .92 : .84;
+          velocityX = Math.max(-58, Math.min(58, (velocityX - x * stiffness) * damping));
+          velocityY = Math.max(-58, Math.min(58, (velocityY - y * stiffness) * damping));
           x += velocityX;
           y += velocityY;
           renderPendant();
 
-          if (Math.abs(x) < .08 && Math.abs(y) < .08 && Math.abs(velocityX) < .08 && Math.abs(velocityY) < .08) {
+          if (Math.abs(x) < .12 && Math.abs(y) < .12 && Math.abs(velocityX) < .12 && Math.abs(velocityY) < .12) {
             x = 0;
             y = 0;
             velocityX = 0;
@@ -528,9 +556,9 @@
       const pluckPendant = () => {
         if (reduceMotion.matches) return;
         stopSpring();
-        y = 18;
-        velocityX = (Math.random() > .5 ? 1 : -1) * 1.4;
-        velocityY = 1.2;
+        y = 22;
+        velocityX = (Math.random() > .5 ? 1 : -1) * 3.2;
+        velocityY = 2;
         renderPendant();
         springHome();
       };
@@ -540,12 +568,20 @@
         event.preventDefault();
         stopSpring();
         pointerId = event.pointerId;
-        startX = event.clientX - x;
-        startY = event.clientY - y;
+        const rect = body.getBoundingClientRect();
+        homeLeft = rect.left - x;
+        homeTop = rect.top - y;
+        bodyWidth = rect.width;
+        bodyHeight = rect.height;
+        grabOffsetX = event.clientX - rect.left;
+        grabOffsetY = event.clientY - rect.top;
         lastX = event.clientX;
         lastY = event.clientY;
         lastTime = performance.now();
+        dragStartX = event.clientX;
+        dragStartY = event.clientY;
         moved = false;
+        dragging = true;
         pendant.classList.add("is-dragging");
         body.setPointerCapture(pointerId);
       });
@@ -555,23 +591,33 @@
         event.preventDefault();
         const now = performance.now();
         const elapsed = Math.max(8, now - lastTime);
-        const maxX = window.matchMedia("(max-width: 620px)").matches ? 48 : 92;
-        x = Math.max(-maxX, Math.min(maxX, event.clientX - startX));
-        y = Math.max(-7, Math.min(105, event.clientY - startY));
-        velocityX = (event.clientX - lastX) / elapsed * 9;
-        velocityY = (event.clientY - lastY) / elapsed * 9;
-        moved ||= Math.hypot(event.clientX - lastX, event.clientY - lastY) > 1.5;
+        const margin = 6;
+        const nextX = event.clientX - grabOffsetX - homeLeft;
+        const nextY = event.clientY - grabOffsetY - homeTop;
+        const minX = margin - homeLeft;
+        const maxX = window.innerWidth - margin - bodyWidth - homeLeft;
+        const minY = margin - homeTop;
+        const maxY = window.innerHeight - margin - bodyHeight - homeTop;
+        x = Math.max(minX, Math.min(maxX, nextX));
+        y = Math.max(minY, Math.min(maxY, nextY));
+        velocityX = Math.max(-34, Math.min(34, (event.clientX - lastX) / elapsed * 16));
+        velocityY = Math.max(-34, Math.min(34, (event.clientY - lastY) / elapsed * 16));
+        moved ||= Math.hypot(event.clientX - dragStartX, event.clientY - dragStartY) > 4;
         lastX = event.clientX;
         lastY = event.clientY;
         lastTime = now;
         renderPendant();
       });
 
-      const releasePendant = (event) => {
-        if (event.pointerId !== pointerId) return;
-        if (body.hasPointerCapture(pointerId)) body.releasePointerCapture(pointerId);
+      const releasePendant = (event = null) => {
+        if (!dragging || (event && event.pointerId !== pointerId)) return;
+        const releasedPointerId = pointerId;
+        dragging = false;
         pointerId = null;
         pendant.classList.remove("is-dragging");
+        if (releasedPointerId !== null && body.hasPointerCapture(releasedPointerId)) {
+          body.releasePointerCapture(releasedPointerId);
+        }
         if (!moved) {
           pluckPendant();
           return;
@@ -580,6 +626,11 @@
       };
       body.addEventListener("pointerup", releasePendant);
       body.addEventListener("pointercancel", releasePendant);
+      body.addEventListener("lostpointercapture", () => releasePendant());
+      window.addEventListener("blur", () => releasePendant());
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) releasePendant();
+      });
 
       pendant.addEventListener("keydown", (event) => {
         if (event.key !== "Enter" && event.key !== " ") return;
@@ -667,6 +718,7 @@
   renderCustomizationModules();
   renderProjectCases();
   renderContact();
+  assignRandomWatermarks();
   bindUtilities();
   bindCustomizationPrompt();
   bindPlayfulEffects();
