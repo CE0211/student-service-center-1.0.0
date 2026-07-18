@@ -39,7 +39,7 @@
   color: var(--ink);
   background: var(--paper);
 }
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 88px; }
 body { margin: 0; min-width: 320px; background: var(--paper); font-size: 16px; font-weight: 400; line-height: 1.72; }
@@ -47,6 +47,7 @@ body.standard-demo { --paper: #eef5f1; --card: #fbfffc; --accent: #236f5c; --acc
 body.advanced-demo { --paper: #eef0f8; --card: #fcfcff; --accent: #4e5895; --accent-soft: #dfe3f5; }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
+a, button, label, summary, [role="button"] { touch-action: manipulation; }
 [hidden] { display: none !important; }
 h1, h2, h3, strong, b { font-weight: 500; }
 h1, h2, h3 { text-wrap: balance; }
