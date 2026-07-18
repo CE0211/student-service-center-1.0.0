@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#123c3a" />
+    <meta
+      name="description"
+      content="面向高校新生的手机端校园服务导航，集中整理报到流程、待办事项、常用入口与安全提醒。"
+    />
+    <title>校园服务站｜网站定制演示</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="content.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="返回首页">
+        <span class="brand-mark" data-brand-mark>启</span>
+        <span class="brand-copy">
+          <strong data-brand-name>校园服务站</strong>
+          <small data-brand-subtitle>Campus Launchpad</small>
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="主要导航">
+        <a href="#roadmap">流程</a>
+        <a href="#tasks">任务</a>
+        <a href="#checklist">清单</a>
+        <a href="#faq">问答</a>
+      </nav>
+      <button class="ghost-button share-button" type="button" data-share>分享</button>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-copy reveal">
+          <p class="edition" data-edition>高校学生服务网站 · 可定制演示</p>
+          <h1>
+            <span data-hero-prefix>从录取到入住宿舍</span>
+            <em data-hero-title>每一步都心里有数</em>
+          </h1>
+          <p class="hero-intro" data-hero-intro>
+            把分散的通知、入口和经验，整理成一张可以随身打开的行动地图。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#tasks" data-primary-action>查看今日任务</a>
+            <button class="text-button" type="button" data-copy-address>复制功能说明</button>
+          </div>
+          <div class="hero-meta" aria-label="关键信息">
+            <div>
+              <span>交付形式</span>
+              <strong data-arrival-date>以通知书为准</strong>
+            </div>
+            <div>
+              <span>适配范围</span>
+              <strong data-campus-address>新生导航、校园服务、社团招新、活动指南</strong>
+            </div>
+          </div>
+        </div>
+
+        <aside class="launch-card reveal" aria-label="入学准备进度">
+          <div class="launch-card-top">
+            <span class="status-dot"></span>
+            <span data-status-label>准备模式已开启</span>
+            <small data-updated-at>更新于 07.18</small>
+          </div>
+          <div class="progress-orbit" data-progress-orbit style="--progress: 0deg">
+            <div>
+              <strong data-progress-percent>0%</strong>
+              <span>清单进度</span>
+            </div>
+          </div>
+          <p data-card-message>勾选下方清单后，进度会保存在当前浏览器，不上传个人信息。</p>
+          <a href="#checklist">继续完成清单 <span aria-hidden="true">→</span></a>
+        </aside>
+      </section>
+
+      <section class="notice-wrap reveal" data-notice-wrap>
+        <div class="notice-icon" aria-hidden="true">!</div>
+        <div>
+          <strong data-notice-title>重要提醒</strong>
+          <p data-notice-text>缴费、宿舍和报到安排以录取通知书及学校官方渠道为准。</p>
+        </div>
+        <a href="#official">核对入口</a>
+      </section>
+
+      <section class="section quick-section" aria-labelledby="quick-title">
+        <div class="section-heading reveal">
+          <p>QUICK ACCESS</p>
+          <h2 id="quick-title">高频入口，不用到处找</h2>
+          <span>把客户最常被问到的链接放在这里。</span>
+        </div>
+        <div class="quick-grid" data-quick-links></div>
+      </section>
+
+      <section class="section roadmap-section" id="roadmap" aria-labelledby="roadmap-title">
+        <div class="section-heading light reveal">
+          <p>ARRIVAL ROADMAP</p>
+          <h2 id="roadmap-title">报到当天，一条线走完</h2>
+          <span data-roadmap-intro>现场安排可能变化，先找学院迎新点再行动。</span>
+        </div>
+        <ol class="roadmap" data-roadmap></ol>
+      </section>
+
+      <section class="section task-section" id="tasks" aria-labelledby="task-section-title">
+        <div class="section-heading reveal">
+          <p>ACTION BOARD</p>
+          <h2 id="task-section-title">按阶段查看，不被信息淹没</h2>
+          <span>每项任务都说明“做什么”和“为什么”。</span>
+        </div>
+        <div class="task-app reveal">
+          <div class="task-tabs" role="tablist" aria-label="任务阶段" data-task-tabs></div>
+          <article class="task-panel" data-task-panel aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section class="section checklist-section" id="checklist" aria-labelledby="checklist-title">
+        <div class="checklist-intro reveal">
+          <p>MY CHECKLIST</p>
+          <h2 id="checklist-title">只带真正需要的</h2>
+          <span>勾选结果只保存在当前设备的浏览器里，不上传任何个人信息。</span>
+          <div class="mini-progress" aria-label="清单完成进度">
+            <i data-mini-progress></i>
+          </div>
+          <strong data-checklist-count>0 / 0 已完成</strong>
+        </div>
+        <div class="checklist-card reveal" data-checklist></div>
+      </section>
+
+      <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+        <div class="section-heading reveal">
+          <p>COMMON QUESTIONS</p>
+          <h2 id="faq-title">新生最常问的几件事</h2>
+          <span>答案不确定时，明确引导至官方渠道。</span>
+        </div>
+        <div class="faq-list reveal" data-faq-list></div>
+      </section>
+
+      <section class="section official-section" id="official" aria-labelledby="official-title">
+        <div class="official-copy reveal">
+          <p>CUSTOM OPTIONS</p>
+          <h2 id="official-title">一套底层结构，按每位客户独立定制</h2>
+          <span data-disclaimer>本站为非官方信息整理页，关键安排请以学校正式通知为准。</span>
+        </div>
+        <div class="official-links reveal" data-official-links></div>
+      </section>
+
+      <section class="contact-strip reveal" data-contact-wrap>
+        <div>
+          <span data-contact-kicker>还没找到答案？</span>
+          <h2 data-contact-title>联系新生服务志愿者</h2>
+        </div>
+        <a class="primary-button light-button" href="#" data-contact-link>查看联系方式</a>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand">
+        <span class="brand-mark" data-brand-mark>启</span>
+        <div>
+          <strong data-brand-name>校园服务站</strong>
+          <small data-footer-line>把复杂信息变成清晰行动。</small>
+        </div>
+      </div>
+      <p data-footer-note>© 2026 校园服务站定制演示 · All Rights Reserved</p>
+    </footer>
+
+    <nav class="mobile-dock" aria-label="手机快捷导航">
+      <a href="#top"><span>⌂</span>首页</a>
+      <a href="#tasks"><span>✓</span>任务</a>
+      <a href="#checklist"><span>▤</span>清单</a>
+      <a href="#official"><span>↗</span>官方</a>
+    </nav>
+
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+    <noscript>请开启 JavaScript 以查看任务、清单和定制内容。</noscript>
+  </body>
+</html>
