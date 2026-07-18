@@ -88,7 +88,7 @@
       document.documentElement.style.setProperty(`--${name}`, value);
     });
 
-    const brandLogo = String(data.brand.logo || 'assets/creator-logo.png').replace(/["'()\\\r\n]/g, '');
+    const brandLogo = String(data.brand.logo || 'assets/creator-logo.webp').replace(/["'()\\\r\n]/g, '');
     $$('[data-brand-logo]').forEach((node) => {
       node.style.setProperty('--brand-logo-image', `url("${brandLogo}")`);
       node.addEventListener('contextmenu', (event) => event.preventDefault());

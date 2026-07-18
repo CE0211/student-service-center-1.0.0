@@ -13,7 +13,7 @@
   });
   document.querySelector("meta[name='theme-color']").setAttribute("content", theme.colors.brand);
 
-  const brandLogo = String(data.brand.logo || "assets/creator-logo.png").replace(/["'()\\\r\n]/g, "");
+  const brandLogo = String(data.brand.logo || "assets/creator-logo.webp").replace(/["'()\\\r\n]/g, "");
   document.querySelectorAll("[data-brand-logo]").forEach((node) => {
     node.style.setProperty("--brand-logo-image", `url("${brandLogo}")`);
     node.addEventListener("contextmenu", (event) => event.preventDefault());

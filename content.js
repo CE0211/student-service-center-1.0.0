@@ -30,7 +30,7 @@ window.SITE_DATA = {
 
   brand: {
     mark: "启",
-    logo: "assets/creator-logo.png",
+    logo: "assets/creator-logo.webp",
     name: "校园服务站定制",
     subtitle: "Campus Launchpad",
     footerLine: "把复杂信息变成清晰行动。"

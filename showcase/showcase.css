@@ -60,7 +60,7 @@ h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
 .demo-topbar { width: min(calc(100% - 28px), 1180px); min-height: 64px; margin: 12px auto 0; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 18px; position: sticky; top: 8px; z-index: 30; background: color-mix(in srgb, var(--card) 90%, transparent); border: 1px solid rgba(255,255,255,.8); border-radius: 18px; box-shadow: 0 12px 34px rgba(38,32,27,.08); backdrop-filter: blur(16px); }
 .demo-brand { display: flex; align-items: center; gap: 10px; }
-.demo-brand-mark { width: 40px; height: 40px; flex: 0 0 auto; background: var(--accent) url("../assets/creator-logo.png") center / contain no-repeat; border-radius: 12px 12px 12px 4px; }
+.demo-brand-mark { width: 40px; height: 40px; flex: 0 0 auto; background: var(--accent) url("../assets/creator-logo.webp") center / contain no-repeat; border-radius: 12px 12px 12px 4px; }
 .demo-brand div { display: grid; }
 .demo-brand strong { font-size: 15px; font-weight: 500; }
 .demo-brand small { margin-top: 2px; color: var(--muted); font-size: 9px; font-weight: 500; letter-spacing: .08em; }
