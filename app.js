@@ -397,6 +397,89 @@
     });
   }
 
+  function bindPlayfulEffects() {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mascot = $("[data-header-mascot]");
+
+    if (mascot && !reduceMotion.matches) {
+      const variants = ["cat", "ghost", "tail", "duo"];
+      let currentSlot = 3;
+      let currentVariant = mascot.dataset.variant || "duo";
+      let relocating = false;
+
+      const availableSlots = () => window.matchMedia("(max-width: 620px)").matches
+        ? [26, 50, 74]
+        : [18, 34, 50, 66, 82];
+
+      const pickDifferentSlot = () => {
+        const slots = availableSlots();
+        const candidates = slots.map((value, index) => ({ value, index })).filter((item) => item.index !== currentSlot);
+        const selected = candidates[Math.floor(Math.random() * candidates.length)] || { value: slots[0], index: 0 };
+        currentSlot = selected.index;
+        return selected.value;
+      };
+
+      const relocateMascot = () => {
+        if (relocating || document.hidden) return;
+        relocating = true;
+        mascot.classList.remove("is-popping");
+        mascot.classList.add("is-hiding");
+
+        window.setTimeout(() => {
+          const variantCandidates = variants.filter((variant) => variant !== currentVariant);
+          const nextVariant = variantCandidates[Math.floor(Math.random() * variantCandidates.length)] || variants[0];
+          currentVariant = nextVariant;
+          mascot.dataset.variant = nextVariant;
+          mascot.style.setProperty("--mascot-x", `${pickDifferentSlot()}%`);
+          mascot.classList.remove("is-hiding");
+          mascot.classList.add("is-popping");
+          window.setTimeout(() => {
+            mascot.classList.remove("is-popping");
+            relocating = false;
+          }, 520);
+        }, 300);
+      };
+
+      mascot.addEventListener("pointerenter", relocateMascot);
+      mascot.addEventListener("pointerdown", relocateMascot);
+
+      if (window.matchMedia("(hover: none)").matches) {
+        window.setInterval(relocateMascot, 8200);
+      }
+    }
+
+    if (reduceMotion.matches) return;
+    document.addEventListener("pointerdown", (event) => {
+      if (!event.isPrimary || (event.pointerType === "mouse" && event.button !== 0)) return;
+      const rootStyle = getComputedStyle(document.documentElement);
+      const colors = [
+        rootStyle.getPropertyValue("--accent").trim(),
+        rootStyle.getPropertyValue("--brand").trim(),
+        rootStyle.getPropertyValue("--soft").trim(),
+        rootStyle.getPropertyValue("--white").trim()
+      ].filter(Boolean);
+      const particleCount = event.pointerType === "touch" ? 6 : 9;
+
+      for (let index = 0; index < particleCount; index += 1) {
+        const angle = (Math.PI * 2 * index) / particleCount + (Math.random() - .5) * .45;
+        const distance = 24 + Math.random() * 34;
+        const particle = document.createElement("i");
+        particle.className = "pointer-particle";
+        particle.style.setProperty("--particle-x", `${event.clientX}px`);
+        particle.style.setProperty("--particle-y", `${event.clientY}px`);
+        particle.style.setProperty("--particle-tx", `${Math.cos(angle) * distance}px`);
+        particle.style.setProperty("--particle-ty", `${Math.sin(angle) * distance}px`);
+        particle.style.setProperty("--particle-spin", `${Math.round((Math.random() - .5) * 240)}deg`);
+        particle.style.setProperty("--particle-size", `${4 + Math.random() * 5}px`);
+        particle.style.setProperty("--particle-radius", index % 3 === 0 ? "2px" : "50%");
+        particle.style.setProperty("--particle-color", colors[index % colors.length]);
+        document.body.appendChild(particle);
+        particle.addEventListener("animationend", () => particle.remove(), { once: true });
+        window.setTimeout(() => particle.remove(), 900);
+      }
+    }, { passive: true });
+  }
+
   function observeReveals() {
     if (!("IntersectionObserver" in window)) {
       $$(".reveal").forEach((node) => node.classList.add("visible"));
@@ -444,6 +527,7 @@
   renderProjectCases();
   renderContact();
   bindUtilities();
+  bindPlayfulEffects();
   observeReveals();
   restoreHashPosition();
 })();
