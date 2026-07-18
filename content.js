@@ -61,13 +61,13 @@ window.SITE_DATA = {
     { icon: "路", title: "报到路线", description: "到校当天按顺序行动", url: "#roadmap" },
     { icon: "任", title: "阶段任务", description: "到哪个阶段看哪一组", url: "#tasks" },
     { icon: "单", title: "行李清单", description: "勾选结果留在本机", url: "#checklist" },
-    { icon: "周", title: "第一周", description: "提前看看每日重点", url: "#week" }
+    { icon: "服", title: "服务速查", description: "地图、资助、报修与医疗", url: "#services" }
   ],
 
   highlights: [
-    { value: "7", label: "套主题配色" },
-    { value: "4", label: "阶段任务" },
-    { value: "8", label: "项随身清单" },
+    { value: "8", label: "类校园服务" },
+    { value: "6", label: "组定制模块" },
+    { value: "3", label: "档制作参考" },
     { value: "3", label: "端响应适配" }
   ],
 
@@ -141,6 +141,25 @@ window.SITE_DATA = {
     { day: "BEFORE CLASS", title: "为开课做准备", detail: "登录教务系统，收藏课表，提前走一遍宿舍到教学楼的路线。", tag: "不迟到" }
   ],
 
+  serviceFilters: [
+    { id: "all", label: "全部" },
+    { id: "arrival", label: "到校报到" },
+    { id: "life", label: "校园生活" },
+    { id: "study", label: "学习账号" },
+    { id: "support", label: "帮助支持" }
+  ],
+
+  serviceDirectory: [
+    { category: "arrival", icon: "图", title: "校园地图与接站路线", detail: "校门、迎新点、宿舍楼和接站点可以直接导航。", meta: "地图 / 路线 / 接站" },
+    { category: "arrival", icon: "办", title: "报到系统与现场流程", detail: "集中放置线上报到入口、现场顺序和所需材料。", meta: "入口 / 材料 / 流程" },
+    { category: "life", icon: "住", title: "宿舍报修与生活设施", detail: "床位报修、门禁、水电、浴室、快递和洗衣说明。", meta: "报修 / 门禁 / 快递" },
+    { category: "life", icon: "医", title: "校医院与保险报销", detail: "就诊地点、开放时间、校内急救和医保说明。", meta: "医疗 / 保险 / 急救" },
+    { category: "study", icon: "号", title: "教务、校园网与邮箱", detail: "账号激活、初始密码、课表查询和网络连接教程。", meta: "教务 / 网络 / 邮箱" },
+    { category: "study", icon: "馆", title: "图书馆与学习空间", detail: "入馆方式、开放时间、自习室和常用数据库入口。", meta: "图书馆 / 自习 / 数据库" },
+    { category: "support", icon: "助", title: "绿色通道与学生资助", detail: "助学贷款、缓缴、奖助政策和负责部门联系方式。", meta: "资助 / 贷款 / 咨询" },
+    { category: "support", icon: "SOS", title: "辅导员与紧急联系", detail: "学院值班、保卫处、心理支持及家长须知集中展示。", meta: "电话 / 值班 / 家长" }
+  ],
+
   checklist: [
     { id: "id-card", group: "证件", text: "身份证与录取通知书" },
     { id: "photos", group: "证件", text: "学校要求规格的证件照" },
@@ -166,10 +185,46 @@ window.SITE_DATA = {
     { question: "勾选的清单会上传个人信息吗？", answer: "不会。清单只保存在当前浏览器的本地存储中，换设备或清理浏览器数据后需要重新勾选。" }
   ],
 
-  officialLinks: [
-    { title: "七套主题配色", note: "暖杏、珊瑚、向阳、青芽、晴空、靛蓝与柔紫", url: "#top" },
-    { title: "内容模块组合", note: "流程、任务、清单、时间表、FAQ 与安全提醒", url: "#tasks" },
-    { title: "独立定制部署", note: "学校、学院、社团或活动都可拥有独立版本", url: "contact.html#methods" }
+  customizationModules: [
+    { index: "01", tag: "品牌视觉", title: "先让它像你们自己的", detail: "校徽、名称、年份、主色、插画和照片都能替换，不同学院或活动也可以各有一套视觉。", examples: ["校名与届次", "Logo 与主视觉", "七套主题或指定配色"] },
+    { index: "02", tag: "内容结构", title: "资料多，也能整理得有顺序", detail: "按学生真正使用的顺序重排通知，模块可以新增、删减、合并，不必被现有页面结构限制。", examples: ["报到流程", "时间表与清单", "FAQ 与安全提醒"] },
+    { index: "03", tag: "互动工具", title: "让学生动手用，而不是只往下看", detail: "可以加入筛选、搜索、任务进度、倒计时、收藏、复制和分享，让页面变成可操作的小工具。", examples: ["分类筛选", "本地进度保存", "搜索与倒计时"] },
+    { index: "04", tag: "服务入口", title: "把常用入口放回正确位置", detail: "地图、系统、电话、二维码、群聊和公众号都能放到对应场景，减少学生反复翻群消息。", examples: ["地图与导航", "电话和二维码", "官方系统链接"] },
+    { index: "05", tag: "扩展功能", title: "需要时可以升级成服务系统", detail: "表单、预约、身份登录、数据统计和管理后台可以继续开发，并根据数据安全要求选择技术方案。", examples: ["报名与预约", "账号与权限", "数据后台"] },
+    { index: "06", tag: "适配发布", title: "学生在哪打开，都能正常使用", detail: "优先保证手机体验，同时兼容平板和电脑；可发布为网页、二维码入口或绑定独立域名。", examples: ["手机 / 平板 / 电脑", "公开页或受限访问", "独立域名与二维码"] }
+  ],
+
+  projectCases: [
+    {
+      level: "简单",
+      type: "信息型单页",
+      title: "晨屿学院 · 新生报到卡",
+      summary: "把一份迎新通知整理成手机上能迅速看完的报到单页，重点解决时间、地点、材料和联系入口。",
+      suitable: "适合资料不多、上线时间紧的学院或班级",
+      features: ["关键日期", "三步报到", "材料清单", "一键联系"],
+      href: "showcase/basic.html",
+      tone: "basic"
+    },
+    {
+      level: "标准",
+      type: "互动活动站",
+      title: "星港大学 · 社团招新季",
+      summary: "信息展示之外加入活动筛选、日程、常见问题和报名入口，适合需要反复浏览和分享的校园活动。",
+      suitable: "适合社团招新、校园节、赛事和专题活动",
+      features: ["分类筛选", "活动日程", "社团卡片", "报名引导"],
+      href: "showcase/standard.html",
+      tone: "standard"
+    },
+    {
+      level: "进阶",
+      type: "服务台原型",
+      title: "栖岸大学 · 新生服务台",
+      summary: "根据新生、家长和志愿者身份展示不同任务，整合进度、公告、地图和服务入口，并预留后台扩展。",
+      suitable: "适合信息量大、多人群、需要长期维护的项目",
+      features: ["身份视图", "任务进度", "服务目录", "后台扩展"],
+      href: "showcase/advanced.html",
+      tone: "advanced"
+    }
   ],
 
   contact: {

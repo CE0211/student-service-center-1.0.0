@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#4e5895" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>进阶档制作参考｜新生服务台</title>
+    <link rel="icon" href="../assets/creator-logo.png" type="image/png" />
+    <link rel="stylesheet" href="showcase.css" />
+    <script src="showcase.js" defer></script>
+  </head>
+  <body class="advanced-demo">
+    <header class="demo-topbar">
+      <a class="demo-brand" href="../index.html#examples">
+        <span class="demo-brand-mark" aria-hidden="true"></span>
+        <div><strong>制作参考 · 进阶档</strong><small>CONCEPT DEMO</small></div>
+      </a>
+      <nav class="demo-nav" aria-label="示例页面导航">
+        <a href="#dashboard">身份视图</a>
+        <a href="../contact.html#methods">扩展咨询</a>
+        <a href="../index.html#examples">返回展示页</a>
+      </nav>
+    </header>
+
+    <main class="demo-shell">
+      <section class="dashboard-hero reveal">
+        <p class="concept-label">虚构项目 · 概念委托案例</p>
+        <p class="eyebrow">QIAN UNIVERSITY · SERVICE DESK</p>
+        <h1>不同的人打开，看到<em>不同的待办和入口。</em></h1>
+        <p>进阶档适合资料量大、服务人群多、需要长期维护的项目。下面可以切换新生、家长和志愿者视图，演示身份化内容结构。</p>
+        <div class="role-switch" aria-label="切换使用者身份">
+          <button class="active" type="button" data-role="student">我是新生</button>
+          <button type="button" data-role="parent">我是家长</button>
+          <button type="button" data-role="volunteer">我是志愿者</button>
+        </div>
+      </section>
+
+      <section class="dashboard reveal" id="dashboard">
+        <aside class="dashboard-sidebar">
+          <span>WELCOME DESK</span><strong>栖岸新生服务台</strong>
+          <div class="dashboard-progress"><b>68%</b></div>
+          <ul><li>今日任务 3 项</li><li>未读提醒 2 条</li><li>常用服务 8 个</li></ul>
+        </aside>
+        <div class="dashboard-main">
+          <div class="dashboard-welcome"><div><h2>今天先完成最重要的事</h2><p>角色切换会改变下方任务内容；正式系统还可连接账号、数据库和消息通知。</p></div><span>09.01 · 周一</span></div>
+
+          <div class="dashboard-grid" data-role-panel="student">
+            <article class="dashboard-card"><h3>新生待办</h3><p>完成状态可以保存，必要时同步至服务后台。</p><div class="role-tasks"><label><input type="checkbox" checked />核对报到时间与校区</label><label><input type="checkbox" />激活校园网和邮箱</label><label><input type="checkbox" />预约入学体检</label><label><input type="checkbox" />查看班级首次会议</label></div></article>
+            <article class="dashboard-card"><h3>常用服务</h3><p>按使用场景集中入口。</p><div class="service-mini-grid"><span>校园地图</span><span>宿舍报修</span><span>校医院</span><span>绿色通道</span></div></article>
+            <article class="dashboard-card dashboard-wide"><h3>最新提醒</h3><div class="notice-list"><div><b>09:20</b><p>东门接站点调整至二号出口。</p></div><div><b>11:40</b><p>校园卡照片补录入口今晚关闭。</p></div><div><b>14:10</b><p>班级见面会地点更新为 A203。</p></div></div></article>
+          </div>
+
+          <div class="dashboard-grid" data-role-panel="parent" hidden>
+            <article class="dashboard-card"><h3>家长关注</h3><p>把陪同、住宿和安全信息从学生待办中单独整理。</p><div class="role-tasks"><label><input type="checkbox" />确认校外车辆停放位置</label><label><input type="checkbox" />保存学院值班电话</label><label><input type="checkbox" />了解校园探访规定</label><label><input type="checkbox" />核对返程交通安排</label></div></article>
+            <article class="dashboard-card"><h3>家长服务</h3><p>避免与学生操作入口混在一起。</p><div class="service-mini-grid"><span>交通停车</span><span>附近住宿</span><span>安全提醒</span><span>学院联系</span></div></article>
+            <article class="dashboard-card dashboard-wide"><h3>家长须知</h3><div class="notice-list"><div><b>陪同</b><p>宿舍区域开放时间以现场通知为准。</p></div><div><b>缴费</b><p>不通过私人账号代缴任何费用。</p></div><div><b>联系</b><p>紧急情况优先联系学院值班电话。</p></div></div></article>
+          </div>
+
+          <div class="dashboard-grid" data-role-panel="volunteer" hidden>
+            <article class="dashboard-card"><h3>志愿者任务</h3><p>进阶版本可以按岗位分发任务并记录完成状态。</p><div class="role-tasks"><label><input type="checkbox" checked />08:00 签到并领取物资</label><label><input type="checkbox" />核对引导牌和路线</label><label><input type="checkbox" />更新现场排队情况</label><label><input type="checkbox" />17:30 交接遗失物品</label></div></article>
+            <article class="dashboard-card"><h3>现场工具</h3><p>常用操作直接放在值班界面。</p><div class="service-mini-grid"><span>路线广播</span><span>问题上报</span><span>物资登记</span><span>失物招领</span></div></article>
+            <article class="dashboard-card dashboard-wide"><h3>岗位通知</h3><div class="notice-list"><div><b>东门组</b><p>二号出口客流增加，请补充两名引导员。</p></div><div><b>宿舍组</b><p>六号楼电梯维护，改走西侧入口。</p></div><div><b>咨询组</b><p>绿色通道统一引导至综合楼 102。</p></div></div></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="demo-footer"><span>本页为虚构概念案例；真实登录、数据同步和管理后台需单独配置服务端。</span><a href="../contact.html#methods">联系制作方 →</a></footer>
+  </body>
+</html>

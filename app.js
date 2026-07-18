@@ -209,6 +209,49 @@
     `).join("");
   }
 
+  function renderServiceDirectory() {
+    const toolbar = $("[data-service-filters]");
+    const grid = $("[data-service-grid]");
+    if (!toolbar || !grid) return;
+
+    toolbar.innerHTML = data.serviceFilters.map((filter, index) => `
+      <button type="button" data-service-filter="${escapeHtml(filter.id)}" aria-pressed="${index === 0}">
+        ${escapeHtml(filter.label)}
+      </button>
+    `).join("");
+
+    const renderGrid = (filterId) => {
+      const items = filterId === "all"
+        ? data.serviceDirectory
+        : data.serviceDirectory.filter((item) => item.category === filterId);
+      grid.innerHTML = items.map((item) => `
+        <article class="service-card reveal">
+          <div class="service-card-top">
+            <span>${escapeHtml(item.icon)}</span>
+            <small>${escapeHtml(item.meta)}</small>
+          </div>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.detail)}</p>
+          <button type="button" data-service-demo="${escapeHtml(item.title)}">正式版可接真实入口 <i aria-hidden="true">↗</i></button>
+        </article>
+      `).join("");
+      $$('[data-service-filter]', toolbar).forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.serviceFilter === filterId));
+      });
+      observeReveals();
+    };
+
+    toolbar.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-service-filter]");
+      if (button) renderGrid(button.dataset.serviceFilter);
+    });
+    grid.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-service-demo]");
+      if (button) showToast(`${button.dataset.serviceDemo}：定制时替换为客户确认的真实入口`);
+    });
+    renderGrid(data.serviceFilters[0].id);
+  }
+
   const storageKey = `campus-guide:${data.site.id}:${data.site.contentVersion}:checklist`;
   function loadChecks() {
     try { return JSON.parse(localStorage.getItem(storageKey)) || []; } catch { return []; }
@@ -278,18 +321,43 @@
     `).join("");
   }
 
-  function renderOfficialLinks() {
-    $("[data-official-links]").innerHTML = data.officialLinks.map((item) => {
-      const internal = String(item.url).startsWith("#");
-      const attributes = internal ? "" : ' target="_blank" rel="noopener noreferrer"';
-      return `
-        <a href="${internal ? escapeHtml(item.url) : safeUrl(item.url)}"${attributes}>
-          <div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.note)}</small></div>
-          <span aria-hidden="true">↗</span>
-        </a>
-      `;
-    }).join("");
+  function renderCustomizationModules() {
+    const container = $("[data-customization-modules]");
+    if (!container) return;
+    container.innerHTML = data.customizationModules.map((item) => `
+      <article class="customization-card reveal">
+        <div class="customization-card-top"><b>${escapeHtml(item.index)}</b><span>${escapeHtml(item.tag)}</span></div>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.detail)}</p>
+        <ul>${item.examples.map((example) => `<li>${escapeHtml(example)}</li>`).join("")}</ul>
+      </article>
+    `).join("");
+  }
 
+  function renderProjectCases() {
+    const container = $("[data-project-cases]");
+    if (!container) return;
+    container.innerHTML = data.projectCases.map((item, index) => `
+      <a class="case-card case-${escapeHtml(item.tone)} reveal" href="${safeUrl(item.href)}">
+        <div class="case-preview" aria-hidden="true">
+          <span class="case-browser-bar"><i></i><i></i><i></i></span>
+          <div class="case-screen">
+            <b>${String(index + 1).padStart(2, "0")}</b>
+            <span></span><span></span><span></span>
+            <div><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="case-meta"><span>${escapeHtml(item.level)}</span><small>${escapeHtml(item.type)}</small></div>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.summary)}</p>
+        <strong>${escapeHtml(item.suitable)}</strong>
+        <ul>${item.features.map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>
+        <span class="case-link">打开完整概念页面 <i aria-hidden="true">↗</i></span>
+      </a>
+    `).join("");
+  }
+
+  function renderContact() {
     const contact = data.contact;
     $("[data-contact-wrap]").hidden = !contact.enabled;
     setText("[data-contact-kicker]", contact.kicker);
@@ -345,6 +413,22 @@
     $$(".reveal").forEach((node) => observer.observe(node));
   }
 
+  function restoreHashPosition() {
+    if (!window.location.hash) return;
+    let targetId = window.location.hash.slice(1);
+    try { targetId = decodeURIComponent(targetId); } catch { /* 保留原始锚点 */ }
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const previousBehavior = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = "auto";
+        target.scrollIntoView({ block: "start" });
+        document.documentElement.style.scrollBehavior = previousBehavior;
+      });
+    });
+  }
+
   applySiteSettings();
   renderThemePicker();
   renderQuickLinks();
@@ -352,10 +436,14 @@
   renderRoadmap();
   renderTasks();
   renderWeekPlan();
+  renderServiceDirectory();
   renderChecklist();
   renderSafetyCards();
   renderFaqs();
-  renderOfficialLinks();
+  renderCustomizationModules();
+  renderProjectCases();
+  renderContact();
   bindUtilities();
   observeReveals();
+  restoreHashPosition();
 })();
