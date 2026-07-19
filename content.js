@@ -1,9 +1,10 @@
 window.SITE_DATA = {
   site: {
-    id: "campus-launchpad-public-demo",
-    contentVersion: "2",
+    id: "campus-launchpad",
+    version: "1.0.0",
+    contentVersion: "1.0.0",
     language: "zh-CN",
-    title: "校园服务站定制｜网站功能展示",
+    title: "校园服务站定制｜Student Service Center-1.0.0",
     description: "报到流程、阶段任务、行李清单、第一周安排、常见问答与安全提醒，一页整理清楚。",
     themeColor: "#9a4e3f",
     defaultTheme: "warm",
@@ -32,7 +33,7 @@ window.SITE_DATA = {
     mark: "启",
     logo: "assets/creator-logo.webp",
     name: "校园服务站定制",
-    subtitle: "Campus Launchpad",
+    subtitle: "Student Service Center-1.0.0",
     footerLine: "把复杂信息变成清晰行动。"
   },
 
@@ -45,7 +46,7 @@ window.SITE_DATA = {
     arrivalDate: "手机 / 平板 / 电脑",
     campusAddress: "迎新导航 / 校园生活 / 活动指南",
     statusLabel: "你的准备清单",
-    updatedAt: "互动示例",
+    updatedAt: "正式版 1.0.0",
     cardMessage: "勾选完成项，进度会自动保存在当前浏览器。换设备后需要重新勾选。"
   },
 
